@@ -1,91 +1,118 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import ReactDOM from 'react-dom';
-import CytoscapeComponent from "react-cytoscapejs"
+import localforage from 'localforage';
+
+import ReactFlow, { ReactFlowProvider, Handle, MiniMap, Controls, Background } from 'react-flow-renderer';
 
 import './index.css';
 
-// Cytoscape MAIN Component
-const defaultElements = [
-  { data: { id: 'one', label: 'Node 1' }, position: { x: 0, y: 0 } },
-  { data: { id: 'two', label: 'Node 2' }, position: { x: 745, y: 11 } },
-  { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } },
+localforage.config({
+  name: 'react-flow-docs',
+  storeName: 'flows',
+});
+
+const style = {
+  background: '#262626',
+  width: '100vw',  //TONY HERE :)
+  height: '100vh', //TONY HERE :)
+};
+
+const customNodeStyles = {
+  background: '#FADD60',
+  color: '#ED4E4A',
+  padding: 10,
+};
+
+const initialElements = [
+  {
+    id: '1',
+    type: 'special',
+    position: { x: 300, y: 300 },
+    data: { text: 'Node-1' },
+  },
+  {
+    id: '2',
+    type: 'special',
+    position: { x: 600, y: 300 },
+    data: { text: 'Node-2' },
+  },
+  { id: 'e1-2', source: '1', target: '2', animated: true, label: 'animated styled edge', style: { stroke: 'red' } }
 ];
 
-function  MyCytoscape({ elements, handleSavePosition }) {
-  const refCy = useRef(null)
-  const cyStyle = { height: '600px', width: '800px', margin: '20px 0px' };
-  const options = elements.length === 0 ? defaultElements : elements;
+const CustomNodeComponent = ({ data }) => {
+  return (
+    <div style={customNodeStyles}>
+      <Handle type="target" position="left" style={{ borderRadius: 0 }} />
+      <div>{data.text}</div>
+      <Handle
+        type="source"
+        position="right"
+        id="a"
+        style={{ top: '30%', borderRadius: 0 }}
+      />
+      <Handle
+        type="source"
+        position="right"
+        id="b"
+        style={{ top: '70%', borderRadius: 0 }}
+      />
+    </div>
+  );
+};
 
-  function initListeners() {
-    refCy.current.on('mouseup', 'node', evt => {
-      handleSavePosition(evt)
-    })
-  }
+const nodeTypes = {
+  special: CustomNodeComponent,
+};
 
-  useEffect(() => {
-    return () => {
-      if(refCy.current) {
-        refCy.current.removeAllListeners()
-      }
-    }
-  }, [])
-
- return (
-    <CytoscapeComponent
-      elements={options} 
-      style={ cyStyle } 
-      pan={{
-        x:50,
-        y:50
-      }}
-      cy={cy => {
-        refCy.current = cy;
-        initListeners()
-      }}
-  />
- )
-}
-
+const flowKey = 'react-flow';
 
 function App() {
-  const [elements, setElements] = React.useState([]);
-  const refElements = React.useRef(null);
-  const [keyForce, setKeyForce] = React.useState(Date.now());
+  const [rfInstance, setRfInstance] = useState(null);
+  const [elements, setElements] = useState(initialElements);
 
-  function handleSavePosition(event) {
-    const elementsItem = JSON.parse(JSON.stringify(defaultElements))
-    const nodeId = event.target.id();
-    const { x, y } = event.position;
+  const onSave = useCallback(() => {
+    if(rfInstance) {
+      const flow = rfInstance.toObject();
+      localforage.setItem(flowKey, flow);
+    }
+  }, [rfInstance])
 
-    elementsItem.forEach(ele => {
-      if(ele.data.id === nodeId) {
-        ele = {
-          ...ele,
-          position: { x , y }
-        }
-      }
-    })
-    refElements.current = elementsItem
-  }
-
-  function handleSaveData() {
-    console.log('refElements.current: ', refElements.current)
-  }
+  const onRestore = useCallback(() => {
+    async function restoreFlow() {
+      const flow = await localforage.getItem(flowKey);
+      if(flow) {
+        setElements(flow.elements || []);
+      };
+    }
+    restoreFlow();
+  }, [])
 
   return (
-    <React.Fragment>
-      <button type="button" onClick={handleSaveData} >Save Data</button>
-      <MyCytoscape keyForce={keyForce} elements={elements} handleSavePosition={handleSavePosition}/>
+    <ReactFlowProvider>
+      <div style={style}>
+        <ReactFlow 
+            elements={elements} 
+            nodeTypes={nodeTypes} 
+            snapToGrid={true}
+            onLoad={setRfInstance}
+          >
+          <MiniMap />
+          <Controls />
+          <Background variant="dots" gap={12} size={0.1} />
 
-    </React.Fragment>
+          <div className="save__controls">
+            <button onClick={onSave}>save</button>
+            <button onClick={onRestore}>restore</button>
+          </div>
+        </ReactFlow>
+      </div>
+    </ReactFlowProvider>
   )
 }
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );
 
