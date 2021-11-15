@@ -9,13 +9,15 @@ import './index.css';
 import DragDrop from './components/DragDrop'
 import UpdatableEdge from './components/UpdatableEdge';
 import Edge from './components/Edge';
+import EdgeWithButtonFlow from './components/EdgeWithButton';
 
 function App() {
   return (
     <>
-      <Edge />
+      {/* <Edge /> */}
       {/* <UpdatableEdge /> */}
       {/* <DragDrop /> */}
+      <EdgeWithButtonFlow />
     </>
   )
 }

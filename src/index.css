@@ -76,6 +76,27 @@ code {
   border-color: #ff0072;
 }
 
+.edgebutton {
+  background: #eee;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  height: 20px;
+  line-height: 1;
+  width: 20px;
+}
+
+.edgebutton-foreignobject body {
+  align-items: center;
+  background: transparent;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  min-height: 40px;
+  width: 40px;
+}
+
 @media screen and (min-width: 768px) {
   .dndflow {
     flex-direction: row;
