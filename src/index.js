@@ -12,6 +12,7 @@ import UpdatableEdge from './components/UpdatableEdge';
 import Edge from './components/Edge';
 import EdgeWithButtonFlow from './components/EdgeWithButton';
 import ProviderNode from './components/ProviderNode';
+import Validation from './components/Validation';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Link to="/drag-drop">Drag and Drop</Link>
         <Link to="/edge-with-button">Edge With Button</Link>
         <Link to="/provider-node">Provider Node</Link>
+        <Link to="/validation">Validation</Link>
       </ul>
       <Routes>
         <Route path="/">
@@ -30,6 +32,7 @@ function App() {
           <Route path="/drag-drop" element={<DragDrop />} />
           <Route path="/edge-with-button" element={<EdgeWithButtonFlow />} />
           <Route path="/provider-node" element={<ProviderNode />} />
+          <Route path="/validation" element={<Validation />} />
         </Route>
       </Routes>
     </Router>
