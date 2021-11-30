@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 
 // styles
 import 'react-flow-renderer/dist/style.css'
+import 'react-flow-renderer/dist/theme-default.css';
 import './index.css';
 
 // components
@@ -13,6 +14,7 @@ import Edge from './components/Edge';
 import EdgeWithButtonFlow from './components/EdgeWithButton';
 import ProviderNode from './components/ProviderNode';
 import Validation from './components/Validation';
+import HTMLForm from './components/HTMLForm/HTMLForm';
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Link to="/edge-with-button">Edge With Button</Link>
         <Link to="/provider-node">Provider Node</Link>
         <Link to="/validation">Validation</Link>
+        <Link to="/html-form">HTML Form</Link>
       </ul>
       <Routes>
         <Route path="/">
@@ -33,6 +36,7 @@ function App() {
           <Route path="/edge-with-button" element={<EdgeWithButtonFlow />} />
           <Route path="/provider-node" element={<ProviderNode />} />
           <Route path="/validation" element={<Validation />} />
+          <Route path="/html-form" element={<HTMLForm />} />
         </Route>
       </Routes>
     </Router>
