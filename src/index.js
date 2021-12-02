@@ -15,6 +15,7 @@ import EdgeWithButtonFlow from './components/EdgeWithButton';
 import ProviderNode from './components/ProviderNode';
 import Validation from './components/Validation';
 import HTMLForm from './components/HTMLForm/HTMLForm';
+import ColorPickerNode from './components/ColorPickerNode/ColorPickerNode';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Link to="/provider-node">Provider Node</Link>
         <Link to="/validation">Validation</Link>
         <Link to="/html-form">HTML Form</Link>
+        <Link to="/color-picker-none">Color Picker Node</Link>
       </ul>
       <Routes>
         <Route path="/">
@@ -37,6 +39,7 @@ function App() {
           <Route path="/provider-node" element={<ProviderNode />} />
           <Route path="/validation" element={<Validation />} />
           <Route path="/html-form" element={<HTMLForm />} />
+          <Route path="/color-picker-none" element={<ColorPickerNode />} />
         </Route>
       </Routes>
     </Router>
