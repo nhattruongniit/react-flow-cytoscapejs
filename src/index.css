@@ -222,3 +222,23 @@ input {
   border-radius: 2px;
   max-width: 100px;
 }
+
+.nodeResizer {
+  width: 10px;
+  height: 10px;
+  background: blue;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+}
+
+.reactResizeNodes .react-flow__node-default {
+  width: auto;
+}
+
+.resizeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
