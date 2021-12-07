@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from 'react';
 import ReactFlow from 'react-flow-renderer';
 
@@ -7,6 +8,7 @@ const ResizeNode = () => {
     startY: 0,
     startWidth: 0,
     startHeight: 0,
+   
   });
   const refContainer = useRef(null);
   const refElement = useRef(null);
