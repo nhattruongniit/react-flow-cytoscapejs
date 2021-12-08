@@ -8,7 +8,6 @@ const ResizeNode = () => {
     startY: 0,
     startWidth: 0,
     startHeight: 0,
-   
   });
   const refContainer = useRef(null);
   const refElement = useRef(null);
@@ -35,16 +34,17 @@ const ResizeNode = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      if(refContainer.current) {
-        refContainer.current.addEventListener('mousedown', initDrag, false)
+      if(refElement.current) {
+        refElement.current.addEventListener('mousedown', initDrag)
       }
     }, 100)
 
     return () => {
       document.removeEventListener('mousemove', doDrag, false);    
       document.removeEventListener('mouseup', stopDrag, false);
-      refElement.current.removeEventListener('mousedown', initDrag, false);
-      refContainer.current.removeEventListener('mousedown', initDrag, false)
+      if(refElement.current) {
+        refElement.current.removeEventListener('mousedown', initDrag);
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -57,13 +57,15 @@ const ResizeNode = () => {
       style: { border: '1px solid #ddd' },
       data: { label: (
         <div ref={refContainer} className="resizeContainer">
-          Resize node
+          <iframe src="https://reactjs.org/" width="100%" height="100%" title="123" />
           <div ref={refElement} className="nodeResizer" />
         </div>
       )},
       position: { x: 200, y: 200 },
     },
   ];
+
+  console.log('re-render nodes')
 
   return(
     <ReactFlow className="reactResizeNodes" elements={elements} />
