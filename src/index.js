@@ -17,6 +17,7 @@ import Validation from './components/Validation';
 import HTMLForm from './components/HTMLForm/HTMLForm';
 import ColorPickerNode from './components/ColorPickerNode/ColorPickerNode';
 import ResizeNode from './components/ResizeNode/ResizeNode';
+import PlantLoop from './components/PlantLoop';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Link to="/html-form">HTML Form</Link>
         <Link to="/color-picker-none">Color Picker Node</Link>
         <Link to="/resize-node">Resize Node</Link>
+        <Link to="/plant-loop">PlatLoop</Link>
       </ul>
       <Routes>
         <Route path="/">
@@ -43,6 +45,7 @@ function App() {
           <Route path="/html-form" element={<HTMLForm />} />
           <Route path="/color-picker-none" element={<ColorPickerNode />} />
           <Route path="/resize-node" element={<ResizeNode />} />
+          <Route path="/plant-loop" element={<PlantLoop />} />
         </Route>
       </Routes>
     </Router>
