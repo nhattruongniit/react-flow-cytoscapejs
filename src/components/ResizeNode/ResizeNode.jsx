@@ -51,7 +51,7 @@ const ResizeNode = () => {
 
   const elements = [
     {
-      id: '2',
+      id: '1',
       // type: 'dragHandleNode',
       dragHandle: '.custom-drag-handle',
       style: { border: '1px solid #ddd' },
@@ -63,6 +63,21 @@ const ResizeNode = () => {
       )},
       position: { x: 200, y: 200 },
     },
+    {
+      id: '2',
+      style: { border: '1px solid #ddd' },
+      data: { label: (
+        <div>
+         node B
+        </div>
+      )},
+      position: { x: 400, y: 200 },
+    },
+    {
+      id: 'e1-2',
+      source: '1',
+      target: '2'
+    }
   ];
 
   console.log('re-render nodes')
