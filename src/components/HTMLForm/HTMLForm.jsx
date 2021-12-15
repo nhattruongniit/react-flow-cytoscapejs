@@ -4,19 +4,10 @@ import ReactFlow, { Background, Handle, Controls } from 'react-flow-renderer';
 import ForeName from './ForeName';
 import LastName from './LastName';
 
-const customNodeStyles = {
-  background: '#9CA8B3',
-  color: '#FFF',
-  padding: 10,
-  borderRadius: 4
-};
-
-const CustomNodeComponent = ({ data }) => {
+const SpecialNode = ({ data }) => {
   return (
-    <div style={customNodeStyles}>
-      <div>
-        {data}
-      </div>
+    <div className="nodeTransformer">
+      {data}
       <Handle
         type="source"
         position="bottom"
@@ -28,7 +19,7 @@ const CustomNodeComponent = ({ data }) => {
 };
 
 const nodeTypes = {
-  special: CustomNodeComponent,
+  special: SpecialNode,
 };
 
 function HTMLForm() {
@@ -51,7 +42,7 @@ function HTMLForm() {
     {
       id: '3',
       type: 'input', // input node
-      data: { label: <div>{foreName} {lastName}</div> },
+      data: { label: <div className="nodeTransformer_input">{foreName} {lastName}</div> },
       position: { x: 400, y: 200 },
       sourcePosition: 'top'
     },
@@ -70,10 +61,11 @@ function HTMLForm() {
   ];
 
   return (
-    <ReactFlow elements={initialElements} nodeTypes={nodeTypes}>
-      <Background />
-      <Controls />
-    </ReactFlow>
+      <ReactFlow elements={initialElements} nodeTypes={nodeTypes}>
+        <Background />
+        <Controls />
+      </ReactFlow>
+
   )
 }
 

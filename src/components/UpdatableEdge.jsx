@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactFlow, { Controls, updateEdge, addEdge } from 'react-flow-renderer';
+import ReactFlow, { Controls, updateEdge, MiniMap, Background, addEdge } from 'react-flow-renderer';
 
 const initialElements = [
   {
@@ -40,6 +40,8 @@ const UpdatableEdge = () => {
       onConnect={onConnect}
     >
       <Controls />
+      <MiniMap />
+      <Background />
     </ReactFlow>
   );
 };

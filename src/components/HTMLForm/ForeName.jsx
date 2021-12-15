@@ -1,11 +1,18 @@
 import React from 'react'
 
+// assets
+import { ReactComponent as IconFilter } from 'assets/images/icon-filter.svg'; 
+
 function ForeName({ value, setForeName }) {
   return (
     <>
-      <h6>FORENAME</h6>
-      {/* <input type="text" value={value} onChange={event => setForeName(event.target.value)} /> */}
-      <iframe src="https://reactjs.org/" width="300px" height="300px" title="123" />
+      <div className='nodeTransformer_label'>
+        <IconFilter />
+        Forename
+      </div>
+      <div className="nodeTransformer_content">
+        <iframe src="https://reactjs.org/" width="300px" height="300px" title="123" />
+      </div>
     </>
   )
 }
