@@ -4,7 +4,7 @@ import ReactFlow, { Handle, MiniMap, Controls, Background } from 'react-flow-ren
 import { dataPlantLoop } from '../mocks/dataPlantLoop';
 
 const style = {
-  background: '#262626',
+  background: 'rgb(229 221 221)',
   width: '100vw',  //TONY HERE :)
   height: '100vh', //TONY HERE :)
 };
@@ -22,23 +22,24 @@ const elements = [
     position: { x: 600, y: 300 },
     data: { text: 'Pipe' },
   },
-  { id: 'e1-2a', 
-   source: '1', 
-   target: '2',
-   targetHandle: 'b',
-   animated: true, 
-   label: 'edge', 
-   style: { stroke: 'red' } 
+  { 
+    id: 'e1-2a', 
+    source: '1', 
+    target: '2',
+    targetHandle: 'b',
+    animated: true, 
+    label: 'edge', 
+    style: { stroke: 'red' } 
   },
-  { id: 'e1-2c', 
-   source: '1', 
-   target: '2',
-   targetHandle: 'c',
-   animated: true, 
-   label: 'edge', 
-   style: { stroke: 'red' } 
+  { 
+    id: 'e1-2c', 
+    source: '1', 
+    target: '2',
+    targetHandle: 'c',
+    animated: true, 
+    label: 'edge', 
+    style: { stroke: 'red' } 
   }
-  
 ];
 
 const customNodeStyles = {
