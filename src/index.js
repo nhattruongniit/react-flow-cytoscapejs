@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import 'react-flow-renderer/dist/style.css'
 import 'react-flow-renderer/dist/theme-default.css';
 import './index.css';
+import './layouting.css';
 
 // components
 import DragDrop from './components/DragDrop'
@@ -18,6 +19,7 @@ import HTMLForm from './components/HTMLForm/HTMLForm';
 import ColorPickerNode from './components/ColorPickerNode/ColorPickerNode';
 import ResizeNode from './components/ResizeNode/ResizeNode';
 import PlantLoop from './components/PlantLoop';
+import Layouting from './components/Layouting/Layouting';
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
         <Link to="/color-picker-none">Color Picker Node</Link>
         <Link to="/resize-node">Resize Node</Link>
         <Link to="/plant-loop">PlatLoop</Link>
+        <Link to="/layouting">Layouting</Link>
       </ul>
       <Routes>
         <Route path="/">
@@ -46,6 +49,7 @@ function App() {
           <Route path="/color-picker-none" element={<ColorPickerNode />} />
           <Route path="/resize-node" element={<ResizeNode />} />
           <Route path="/plant-loop" element={<PlantLoop />} />
+          <Route path="/layouting" element={<Layouting />} />
         </Route>
       </Routes>
     </Router>

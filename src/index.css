@@ -221,6 +221,22 @@ code {
 
 /* === end validation === */
 
+/* === start layouting === */
+.layoutflow {
+  flex-grow: 1;
+  position: relative;
+  height: 100%;
+}
+
+.layoutflow .controls {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 10;
+}
+
+/* === end layouting === */
+
 /* input {
   font-size: 12px;
   border: 1px solid rgb(145, 143, 190);
@@ -292,4 +308,12 @@ code {
 .nodeTransformer_content {
   padding: 0 8px;
   margin-top: 8px;
+}
+
+.layouting_label {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
