@@ -16,7 +16,7 @@ import { dataPlantLoop57 } from '../../mocks/dataPlantLoop-57';
 
 const position = { x: 0, y: 0 };
 
-const dagreGraph = new dagre.graphlib.Graph();
+const dagreGraph = new dagre.graphlib.Graph({ multigraph: true });
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
 const nodeExtent = [
@@ -39,34 +39,6 @@ const initialData = dataPlantLoop57.reduce((loopMap, loopItem) => {
     }
     loopMap.nodes += 1;
     loopMap.dataNode.push(nodeItem);
-
-    // const filterNodeNoTo =  loopItem.data?.nodes.inlet.filter(item => !regexTo.test(item));
-    // filterNodeNoTo.forEach((item, idx) => {
-    //   const nodeItemTo = {
-    //     ...loopItem.data,
-    //     position,
-    //     id: `${item}`.toString(),
-    //     // data: { label: loopItem.data.label },
-    //     data: { text: item },
-    //     type: 'special',
-    //   }
-    //   loopMap.nodes += 1;
-    //   loopMap.dataNode.push(nodeItemTo);
-    // })
-
-    // const filterNodeNoFrom =  loopItem.data?.nodes.outlet.filter(item => !regexFrom.test(item));
-    // filterNodeNoFrom.forEach((item, idx) => {
-    //   const nodeItemFrom = {
-    //     ...loopItem.data,
-    //     position,
-    //     id: `${item}`.toString(),
-    //     // data: { label: loopItem.data.label },
-    //     data: { text: item },
-    //     type: 'special',
-    //   }
-    //   loopMap.nodes += 1;
-    //   loopMap.dataNode.push(nodeItemFrom);
-    // })
   } else if(loopItem.group === 'edges') {
     const edgeItem = {
       ...loopItem.data,
@@ -76,24 +48,11 @@ const initialData = dataPlantLoop57.reduce((loopMap, loopItem) => {
       animated: false, 
       group: 'edges',
       type: 'smoothstep', 
-      targetHandle: ''
+      targetHandle: loopItem.data.to_node.toString(),
+      sourceHandle: loopItem.data.from_node.toString()
     }
     loopMap.edges += 1;
     loopMap.dataNode.push(edgeItem);
-
-    // push edge to_node, from_node
-    // if(loopItem.data.from_node !== '' && loopItem.data.to_node !== '') {
-    //   const edgeItemNode = {
-    //     id: `edge-${loopItem.data.from_node}-${loopItem.data.to_node}`, 
-    //     source: loopItem.data.from_node.toString(), 
-    //     target: loopItem.data.to_node.toString(), 
-    //     animated: false, 
-    //     group: 'edges',
-    //     type: 'smoothstep' 
-    //   }
-    //   loopMap.edges += 1;
-    //   loopMap.dataNode.push(edgeItemNode);
-    // }
   }
   return loopMap
 }, {
@@ -102,16 +61,7 @@ const initialData = dataPlantLoop57.reduce((loopMap, loopItem) => {
   dataNode: []
 })
 
-// console.log("dataPlantLoop57: ", dataPlantLoop57)
-
-// const elements = [
-//   {
-//     id: '2',
-//     type: 'special',
-//     position: { x: 100, y: 100 },
-//     data: { text: 'A custom node' },
-//   },
-// ];
+console.log("dataPlantLoop57: ", dataPlantLoop57)
 
 const customNodeStyles = {
   background: '#9CA8B3',
