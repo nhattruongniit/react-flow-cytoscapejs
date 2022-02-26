@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="161" height="91" viewBox="0 0 161 91">
+  <line id="Line_4" data-name="Line 4" x1="153.817" transform="translate(156.459 87.489) rotate(180)" fill="none" stroke="#1de20d" stroke-width="1"/>
+  <g id="Rectangle_5" data-name="Rectangle 5" transform="translate(161 91) rotate(180)" fill="#fff" stroke="#707070" stroke-width="1">
+    <rect width="6" height="7" stroke="none"/>
+    <rect x="0.5" y="0.5" width="5" height="6" fill="none"/>
+  </g>
+  <line id="Line_5" data-name="Line 5" y1="81.018" transform="translate(58.122 87.196) rotate(180)" fill="none" stroke="#1de20d" stroke-width="1"/>
+  <g id="Rectangle_6" data-name="Rectangle 6" transform="translate(61 6) rotate(180)" fill="#fff" stroke="#707070" stroke-width="1">
+    <rect width="6" height="6" stroke="none"/>
+    <rect x="0.5" y="0.5" width="5" height="5" fill="none"/>
+  </g>
+  <path id="Path_2" data-name="Path 2" d="M0,54.6V0" transform="translate(2.935 87.783) rotate(180)" fill="#17eb37" stroke="#1de20d" stroke-width="1"/>
+  <g id="Rectangle_7" data-name="Rectangle 7" transform="translate(6 33) rotate(180)" fill="#fff" stroke="#707070" stroke-width="1">
+    <rect width="6" height="6" stroke="none"/>
+    <rect x="0.5" y="0.5" width="5" height="5" fill="none"/>
+  </g>
+</svg>

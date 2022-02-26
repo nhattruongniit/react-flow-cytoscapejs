@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="161" height="91" viewBox="0 0 161 91">
+  <line id="Line_6" data-name="Line 6" x2="153.817" transform="translate(2.642 3.229)" fill="none" stroke="#1de20d" stroke-width="1"/>
+  <g id="Rectangle_8" data-name="Rectangle 8" transform="translate(155)" fill="#fff" stroke="#707070" stroke-width="1">
+    <rect width="6" height="6" stroke="none"/>
+    <rect x="0.5" y="0.5" width="5" height="5" fill="none"/>
+  </g>
+  <line id="Line_7" data-name="Line 7" y1="81" transform="translate(58 4)" fill="none" stroke="#1de20d" stroke-width="1"/>
+  <g id="Rectangle_9" data-name="Rectangle 9" transform="translate(55 85)" fill="#fff" stroke="#707070" stroke-width="1">
+    <rect width="6" height="6" stroke="none"/>
+    <rect x="0.5" y="0.5" width="5" height="5" fill="none"/>
+  </g>
+  <path id="Path_3" data-name="Path 3" d="M0,54.6V0" transform="translate(2.935 2.935)" fill="#17eb37" stroke="#1de20d" stroke-width="1"/>
+  <g id="Rectangle_10" data-name="Rectangle 10" transform="translate(0 58)" fill="#fff" stroke="#707070" stroke-width="1">
+    <rect width="6" height="6" stroke="none"/>
+    <rect x="0.5" y="0.5" width="5" height="5" fill="none"/>
+  </g>
+</svg>

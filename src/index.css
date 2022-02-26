@@ -23,6 +23,18 @@ code {
     monospace;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.rotate90deg {
+  transform: rotate(90deg);
+}
+
+.transparent {
+  background-color: transparent !important;
+}
+
 .__________cytoscape_container {
   width: calc(100vw - 20px) !important;
   height: calc(100vh - 20px) !important;
@@ -316,4 +328,12 @@ code {
   align-items: center;
   justify-content: center;
   font-size: 12px;
+}
+
+.text-color-black {
+  color: #000;
+}
+
+.text-transform-capitalize {
+  text-transform: capitalize;
 }

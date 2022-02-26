@@ -1,25 +1,16 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "name": "Usonia React Flow",
+  "description": "React flow render",
+  "version": 1,
+  "versionName": "0.0.1",
+  "license": "Usonia Labs",
+  "homepage": "https://gitlab.usonia.io/Usonia/archive/usonia-react-flow",
+  "repository": "git@gitlab.usonia.io:Usonia/archive/usonia-react-flow.git",
+  "icon": "https://usonialabs-simulationresultsandcharts.co.uk/logo.svg",
+  "tags": ["Add-on", "Workspaces", "Usonia Labs", "EnergyPlus™"],
+  "categories": ["output:variables", "output:meter", "results", "charts"],
+  "whatsnew": ["Update react components", "bugfix", "[20-09-2021] Braking Changes UPDATE to usonia-addon-utils"],
+  "size": { "width": 637, "height": 545 },
+  "contexts": ["idf_api", "pusher", "project", "idf_document"]
 }
+
