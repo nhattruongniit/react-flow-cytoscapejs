@@ -1,0 +1,93 @@
+.primarySupply-mixer-2 .mixer,
+.primarySupply-splitter-2 .splitter {
+  width: 220px;
+}
+
+.primarySupply-mixer-2 .inletNode_position_3,
+.primarySupply-splitter-2 .outletNode_position_3 {
+  left: 190px !important;
+}
+
+.primarySupply-mixer-2 .inletNode_position_2,
+.primarySupply-splitter-2 .outletNode_position_2 {
+  left: 145px !important;
+}
+
+.primarySupply-mixer-2 .inletNode_position_1,
+.primarySupply-splitter-2 .outletNode_position_1 {
+  left: 75px !important;
+}
+
+.primarySupply-mixer-2 .inletNode_position_3::before,
+.primarySupply-mixer-2 .inletNode_position_2::before,
+.primarySupply-splitter-2 .outletNode_position_2::before,
+.primarySupply-splitter-2 .outletNode_position_3::before {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  left: -2px;
+}
+.primarySupply-mixer-2 .inletNode_position_1::after,
+.primarySupply-mixer-2 .inletNode_position_2::after,
+.primarySupply-splitter-2 .outletNode_position_1::after,
+.primarySupply-splitter-2 .outletNode_position_2::after,
+.condenserDemand-splitter-3 .outletNode_position_1::after,
+.condenserDemand-mixer-3 .inletNode_position_1::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -30px;
+  left: 0px;
+  height: 35px;
+  width: 1px;
+  background-color: #140c8d;
+  z-index: 1;
+}
+
+.primarySupply-splitter-2 .outletNode_position_2::after,
+.primarySupply-splitter-2 .outletNode_position_1::after,
+.condenserDemand-splitter-3 .outletNode_position_1::after {
+  top: -30px;
+}
+
+.primarySupply-splitter-2 .outletNode_position_2::before,
+.primarySupply-splitter-2 .outletNode_position_3::before {
+  top: 0;
+}
+
+.condenserDemand-mixer-3 .inletNode_position_0,
+.condenserDemand-splitter-3 .outletNode_position_0,
+.condenserDemand-mixer-3 .inletNode_position_1,
+.condenserDemand-mixer-3 .inletNode_position_2,
+.condenserDemand-splitter-3 .outletNode_position_1,
+.condenserDemand-splitter-3 .outletNode_position_2,
+.condenserSupply-mixer-3 .inletNode_position_0,
+.condenserSupply-mixer-3 .inletNode_position_1,
+.condenserSupply-splitter-3 .outletNode_position_0,
+.condenserSupply-splitter-3 .outletNode_position_1 {
+  height: 70px;
+}
+
+.condenserDemand-mixer-3 .mixer,
+.condenserDemand-splitter-3 .splitter {
+  width: 170px;
+}
+
+.condenserDemand-mixer-3 .inletNode_position_1,
+.condenserDemand-splitter-3 .outletNode_position_1 {
+  left: 75px !important;
+}
+
+.condenserDemand-mixer-3 .inletNode_position_2,
+.condenserDemand-splitter-3 .outletNode_position_2 {
+  left: 110px !important;
+}
+
+.condenserSupply-splitter-3 .splitter {
+  width: 170px !important;
+}

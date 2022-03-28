@@ -195,6 +195,7 @@
   align-items: center;
   justify-content: center;
   font-size: 12px;
+  position: relative;
 }
 
 .infoTop {
@@ -208,12 +209,15 @@
 }
 
 .nodeStyles {
-  background-color: #9ca8b3;
-  color: #fff;
+  background-color: #8ecdff;
   text-align: center;
+  padding: 8px 0;
   width: 150px;
-  min-height: 50px;
-  padding: 15px 0;
+  position: relative;
+}
+
+.node-border {
+  border: 1px solid #2d4153;
 }
 
 .inPort {
@@ -249,7 +253,7 @@
 }
 
 .pipe {
-  width: 100%;
+  width: 115px;
   height: 1px;
   border-top: 1px dashed #000;
   position: absolute;
@@ -267,4 +271,188 @@
 
 .nodesLoopItem_container {
   margin-left: 10px;
+}
+
+.revese {
+  transform: scaleX(-1);
+}
+
+.max-width-65 {
+  max-width: 65px;
+}
+
+.node-pump {
+  transform: scaleX(-1);
+  width: 45px;
+}
+
+.node-pump svg {
+  width: 100%;
+}
+
+.coolingCoil .react-flow__node-default {
+  border: 0 !important;
+  box-shadow: 0 0 0 transparent !important;
+  background-color: transparent;
+}
+
+.coolingCoil .react-flow__handle.connectable {
+  display: none;
+}
+
+.lineDarkBlue {
+  transform: rotate(0) !important;
+  width: 75px;
+}
+
+.lineDarkBlue::before,
+.lineDarkBlue::after,
+.node-pump-left::before,
+.node-pump-right::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+}
+
+.lineDarkBlue::before {
+  left: 0;
+}
+
+.lineDarkBlue::after {
+  right: 0;
+}
+
+.lineDarkBlue .pipe {
+  border: 0;
+  background-color: #140c8d;
+  width: 100%;
+}
+
+.nodeOnlyText {
+  transform: rotate(90deg);
+}
+
+.nodeOnlyTextMain .layouting_label {
+  text-decoration: underline;
+}
+
+.node-pump-left {
+  width: 30px;
+  height: 1px;
+  background-color: #140c8d;
+  position: absolute;
+  left: -30px;
+  top: 36px;
+}
+
+.node-pump-left::before {
+  top: -2px;
+}
+
+.node-pump-right::after {
+  top: -2px;
+  right: -5px;
+}
+
+.node-pump-right {
+  width: 20px;
+  height: 1px;
+  background-color: #140c8d;
+  position: absolute;
+  right: -20px;
+  top: 36px;
+}
+
+.condenserDemand-bypass-3,
+.condenserSupply-bypass-3 {
+  min-height: 40px;
+}
+.condenserDemand-bypass-3 .pipe,
+.condenserSupply-bypass-3 .pipe {
+  width: 110px;
+}
+
+.mixer {
+  width: var(--splitter-width);
+  height: 1px;
+  background-color: #7ded74;
+}
+
+.mixer .inletNode {
+  width: 1px;
+  height: 50px;
+  background-color: #7ded74;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.splitter {
+  width: var(--splitter-width);
+  height: 1px;
+  background-color: #7ded74;
+}
+
+.splitter .outletNode {
+  width: 1px;
+  height: 50px;
+  background-color: #7ded74;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.inletNode_position_0::before,
+.inletNode_position_1::before,
+.inletNode_position_2::before,
+.inletNode_position_3::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  left: -2px;
+}
+
+.inletNode_position_0::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -30px;
+  left: -0px;
+  height: 35px;
+  width: 1px;
+  background-color: #140c8d;
+  z-index: 1;
+}
+
+.outletNode_position_0::before,
+.outletNode_position_1::before,
+.outletNode_position_2::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -2px;
+}
+
+.outletNode_position_0::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -30px;
+  left: -0px;
+  height: 35px;
+  width: 1px;
+  background-color: #140c8d;
+  z-index: 1;
 }

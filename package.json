@@ -6,19 +6,19 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "@usonia/usonia-addon-utils": "git+https://usonia:sB1DM7sF4fZxvFVQzWGK@gitlab.usonia.io/Usonia/addons/usonia-addon-utils.git",
     "clsx": "^1.1.1",
     "dagre": "^0.8.5",
+    "elkjs": "^0.7.1",
     "localforage": "^1.10.0",
     "react": "^17.0.2",
     "react-cytoscapejs": "^1.2.1",
     "react-dom": "^17.0.2",
-    "react-flow-renderer": "^10.0.0-next.28",
+    "react-flow-renderer": "^10.0.6",
     "react-json-view": "^1.21.3",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-    "react-split-pane": "^0.1.92",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "web-worker": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
