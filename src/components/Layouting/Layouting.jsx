@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import ReactFlow, { addEdge, useNodesState, useEdgesState } from 'react-flow-renderer';
 import dagre from 'dagre';
 
-import { initialNodes, initialEdges } from 'mocks/dataLayouting.js';
+// import { initialNodes, initialEdges } from 'mocks/dataLayouting.js'; 
 import { dataPlantLoop79 } from 'mocks/dataPlantLoop-79';
 
 const position = { x: 0, y: 0 };
