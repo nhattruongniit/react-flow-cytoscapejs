@@ -13,6 +13,8 @@ export default function CustomEdge({
   data,
   markerEnd,
 }) {
+
+  console.log(id)
   const edgePath = getBezierPath({
     sourceX,
     sourceY,

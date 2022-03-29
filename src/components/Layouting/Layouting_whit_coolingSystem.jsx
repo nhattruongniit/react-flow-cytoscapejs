@@ -14,8 +14,8 @@ import clsx from 'clsx';
 import { dataPlantLoop79 } from '../../mocks/dataPlantLoop-79';
 
 // components
-// import InletTarget from './components/InletTarget';
-// import OutletSource from './components/OutletSource';
+import InletTarget from './components/InletTarget';
+import OutletSource from './components/OutletSource';
 import NodeItem from './components/NodeItem';
 
 // configs
@@ -184,7 +184,7 @@ const LayoutFlow = () => {
     const isPump = nodes
                     .filter(element => regexOnlyPump.test(element.class))
                     .some(pum => pum.id === id);
-    // const leftStyle = isPump ? 36 : 25;
+    const leftStyle = isPump ? 36 : 25;
     // filter Connector
     const mixerFiltered = nodes
                           .filter(element => element.class === 'Connector:Mixer')
@@ -222,14 +222,14 @@ const LayoutFlow = () => {
           )}
           style={{ maxWidth: nodeItem?.size?.maxWidth || 'auto'}}
         >
-          {/* {nodeItem?.nodes?.inlet.length > 0 && (
+          {nodeItem?.nodes?.inlet.length > 0 && (
             <InletTarget 
               nodeItem={nodeItem} 
               isHorizontal={isHorizontal} 
               leftStyle={leftStyle} 
             />
-          )} */}
-          
+          )}
+            
           <div
             className={clsx(
               "layouting_label",
@@ -251,13 +251,13 @@ const LayoutFlow = () => {
             />
           </div>
 
-          {/* {nodeItem?.nodes?.outlet.length > 0 && (
+          {nodeItem?.nodes?.outlet.length > 0 && (
             <OutletSource 
               nodeItem={nodeItem} 
               isHorizontal={isHorizontal} 
               leftStyle={leftStyle} 
             /> 
-          )} */}
+          )}
 
         </div>
       </>

@@ -610,10 +610,6 @@ export const coolingSystemDiagram = (data, nodesLoop, hashMapOrderLoop) => {
   const { nodePrimaryDemand, nodePrimarySupply }  = renderNodePrimaryChilled(data, hashMapOrderLoop);
   const { nodeCondenserLoopDemand, nodeCondenserLoopSupply }  = renderNodeCondenser(data, hashMapOrderLoop);  
 
-  console.log('nodeSecondaryDemand: ', nodeSecondaryDemand);
-  console.log('nodeSecondarySupply: ', nodeSecondarySupply)
-
-
   const nodesParent = Object.keys(nodesLoop).reduce((nodeMap, nodeKey, index) => {
     // push parent node item
     const order = index + 1;

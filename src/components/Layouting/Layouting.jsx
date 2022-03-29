@@ -1,124 +1,225 @@
-import React, { useCallback } from 'react';
-import ReactFlow, { addEdge, useNodesState, useEdgesState } from 'react-flow-renderer';
+import React, { useState, useMemo, useCallback } from 'react';
+import ReactFlow, {
+  ReactFlowProvider,
+  Controls,
+  isNode,
+  Position,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  MiniMap,
+  Background,
+  getBezierPath, getMarkerEnd
+} from 'react-flow-renderer';
 import dagre from 'dagre';
+import clsx from 'clsx';
 
-// import { initialNodes, initialEdges } from 'mocks/dataLayouting.js'; 
-import { dataPlantLoop79 } from 'mocks/dataPlantLoop-79';
+import { dataPlantLoop79 } from '../../mocks/dataPlantLoop-79';
 
-const position = { x: 0, y: 0 };
+// components
+import InletTarget from './components/InletTarget';
+import OutletSource from './components/OutletSource';
+import NodeItem from './components/NodeItem';
+import CustomEdge from './components/CustomEdge';
 
-const initialData = dataPlantLoop79.reduce((loopMap, loopItem) => {
-  if(loopItem.group === 'nodes') {
-    const nodeItem = {
-      ...loopItem.data,
-      position,
-      id: loopItem.data.id.toString(),
-      data: { label: loopItem.data.label },
-      // type: 'special',
+// configs
+import { nodeWidth, nodeHeight } from 'configs';
+// helpers
+import { regexOnlyPump, regexOnlyPipe } from './helpers/regexNodes'
+
+// diagram 
+import { coolingSystemDiagram } from './helpers/coolingSystemDiagram';
+
+let isHorizontal = 'LR';
+const dagreGraph = new dagre.graphlib.Graph({ multigraph: true });
+dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+// find node that has 'loop' field
+const loops = [];
+dataPlantLoop79.filter(item => Object.keys(item.data)
+    .find(key => key.includes('loop')))
+    .forEach(nodeItem => {
+      nodeItem.data.loop.forEach(item => {
+        loops.push( {
+          ...nodeItem.data,
+          id: nodeItem.data.id,
+          label: item
+        })
+      })
+    });
+
+const nodesLoop = [...new Set(loops.map(ele => ele.label))].reduce((acc, curr) => {
+  const currSplit = curr.split(':');
+  const textFirst = currSplit[0];
+  const textLast = currSplit[currSplit.length - 1];
+  if(acc.hasOwnProperty(textFirst)) {
+    if(acc[textFirst].hasOwnProperty(textLast)) {
+      acc[textFirst][textLast].push(curr);
+    } else {
+      acc[textFirst] = {
+        ...acc[textFirst],
+        [textLast]: acc[textFirst][textLast] ? acc[textFirst][textLast].concat(curr) : [].concat(curr)
+      }
     }
-    loopMap.nodes.push(nodeItem);
-  } else if(loopItem.group === 'edges') {
+  } else {
+    acc[textFirst] = {
+      ...acc[textFirst],
+      [textLast]: [].concat(curr)
+    }
+  } 
+  return acc;
+}, {})
+
+// hashMap parent loop
+const hashMapOrderLoop = Object.keys(nodesLoop).reduce((acc, curr, index) => {
+  acc[curr] = `${index + 1}`.toString();
+  return acc;
+}, {})
+
+const dataNodes = coolingSystemDiagram(dataPlantLoop79, nodesLoop, hashMapOrderLoop);
+const dataEdges = dataPlantLoop79.reduce((loopMap, loopItem) => {
+  if(loopItem.group === 'edges') {
     const edgeItem = {
-      ...loopItem.data,
+      // ...loopItem.data,
+      id: loopItem.data.id.toString(), 
       source: loopItem.data.source.toString(), 
       target: loopItem.data.target.toString(), 
-      type: 'smoothstep', 
-      animated: true,
-      targetHandle: loopItem.data.to_node.toString(),
-      sourceHandle: loopItem.data.from_node.toString()
+      animated: true, 
+      // group: 'edges',
+      // type: 'default', 
+      label: loopItem.data.id.toString(),
+      // targetHandle: loopItem.data.to_node.toString(),
+      // sourceHandle: loopItem.data.from_node.toString()
     }
     loopMap.edges.push(edgeItem);
   }
   return loopMap
 }, {
-  nodes: [],
-  edges: []
+  edges: [],
 })
 
-console.log('dataPlantLoop79: ', initialData)
-
-
-const dagreGraph = new dagre.graphlib.Graph();
-dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-const nodeWidth = 172;
-const nodeHeight = 36;
-
-const getLayoutedElements = (nodes, edges, direction = 'TB') => {
-  const isHorizontal = direction === 'LR';
-  dagreGraph.setGraph({ rankdir: direction });
-
-  nodes.forEach((node) => {
-    dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
-  });
-
-  edges.forEach((edge) => {
-    dagreGraph.setEdge(edge.source, edge.target);
-  });
-
-  dagre.layout(dagreGraph);
-
-  nodes.forEach((node) => {
-    const nodeWithPosition = dagreGraph.node(node.id);
-    node.targetPosition = isHorizontal ? 'left' : 'top';
-    node.sourcePosition = isHorizontal ? 'right' : 'bottom';
-
-    // We are shifting the dagre node position (anchor=center center) to the top left
-    // so it matches the React Flow node anchor point (top left).
-    node.position = {
-      x: nodeWithPosition.x - nodeWidth / 2,
-      y: nodeWithPosition.y - nodeHeight / 2,
-    };
-
-    return node;
-  });
-
-  return { nodes, edges };
-};
-
-const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-  initialData.nodes,
-  initialData.edges
-);
-
+console.log("layoutedEdges: ", dataEdges.edges)
 
 const LayoutFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(dataEdges.edges);
+  const [nodes, , onNodesChange] = useNodesState(dataNodes);
 
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge({ ...params, type: 'smoothstep', animated: true }, eds)),
-    [setEdges]
-  );
+  // const onConnect = useCallback(
+  //   (params) => setEdges((eds) => addEdge({ ...params, type: 'default', animated: true }, eds)),
+  //   [setEdges]
+  // );
 
-  const onLayout = useCallback(
-    (direction) => {
-      const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-        nodes,
-        edges,
-        direction
-      );
+  const onConnect = (params) => setEdges((eds) => addEdge(params, eds));
 
-      setNodes([...layoutedNodes]);
-      setEdges([...layoutedEdges]);
-    },
-    [nodes, edges, setNodes, setEdges]
-  );
+  const CustomNodeComponent = ({ id, data, ...props}) => {
+    const nodeItem = nodes.find(element => element.id === id) 
+    // filter Pump
+    const isPump = nodes
+                    .filter(element => regexOnlyPump.test(element.class))
+                    .some(pum => pum.id === id);
+    const leftStyle = isPump ? 36 : 25;
+    // filter Connector
+    const mixerFiltered = nodes
+                          .filter(element => element.class === 'Connector:Mixer')
+                          .find(ele => ele.id === id);
+    const isMixerNode = !!mixerFiltered;
+    const splitterFiltered = nodes
+                              .filter(element => element.class === 'Connector:Splitter')
+                              .find(ele => ele.id === id);
+    const isSplitter = !!splitterFiltered;
+    // filter pipe
+    const pipeFiltered = nodes
+                          .filter(element => regexOnlyPipe.test(element.class))
+                          .find(ele => ele.id === id);
+    const isPipe = !!pipeFiltered;
+    // filter demand
+    const isSupply = nodeItem?.lastText === 'supply';
+    // filter muster
+    const musterFiltered = nodes
+                      .filter(element => element.class === 'Connector:Muster')
+                      .find(ele => ele.id === id);
+    const isMuster = !!musterFiltered;
+
+    return (
+      <>
+        {/* {nodeItem?.class} */}
+        
+        <div 
+          className={clsx(
+            isPump ? 'pumpStyles' : 'nodeStyles',
+            (isMixerNode || isSplitter || isPipe || isMuster) && 'transparent',
+            isSupply && 'revese',
+            isPipe && 'rotate90deg',
+            nodeItem.hasBorder && 'node-border',
+            nodeItem.classCss
+          )}
+          style={{ maxWidth: nodeItem?.size?.maxWidth || 'auto'}}
+        >
+          {nodeItem?.nodes?.inlet.length > 0 && (
+            <InletTarget 
+              nodeItem={nodeItem} 
+              isHorizontal={isHorizontal} 
+              leftStyle={leftStyle} 
+            />
+          )}
+            
+          <div
+            className={clsx(
+              "layouting_label",
+              isSplitter && 'splitter',
+              isMixerNode && 'mixer'
+              // nodeItem.classCss
+            )}
+          >
+            {/* <div /> */}
+            <NodeItem 
+              id={id} 
+              data={data} 
+              isPump={isPump} 
+              isMixerNode={isMixerNode} 
+              isSplitter={isSplitter} 
+              isPipe={isPipe} 
+              isMuster={isMuster}
+              nodeItem={nodeItem}
+            />
+          </div>
+
+          {nodeItem?.nodes?.outlet.length > 0 && (
+            <OutletSource 
+              nodeItem={nodeItem} 
+              isHorizontal={isHorizontal} 
+              leftStyle={leftStyle} 
+            /> 
+          )}
+
+        </div>
+      </>
+    );
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const nodeTypes = useMemo(() => ({ special: CustomNodeComponent }), []);
+  const edgeTypes = useMemo(() => ({ custom: CustomEdge }), []);
 
   return (
-    <div className="layoutflow">
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        connectionLineType="smoothstep"
-        fitView
-      />
-      <div className="controls">
-        <button onClick={() => onLayout('TB')}>vertical layout</button>
-        <button onClick={() => onLayout('LR')}>horizontal layout</button>
+    <div className='layouting_wrapper'>
+      <div className="layoutflow coolingCoil">
+        <ReactFlow
+          nodes={nodes} 
+          edges={edges}
+          nodeTypes={nodeTypes}
+          edgeTypes={edgeTypes}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          snapToGrid
+          fitView
+          attributionPosition="top-right"
+        >
+          <MiniMap />
+          <Controls />
+          <Background />
+        </ReactFlow>
       </div>
     </div>
   );

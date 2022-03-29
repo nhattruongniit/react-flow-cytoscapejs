@@ -22,13 +22,13 @@ import './coolingSystem.css';
 // import ResizeNode from './components/ResizeNode/ResizeNode';
 // import PlantLoop from './components/PlantLoop';
 import Layouting from './components/Layouting/Layouting';
-import LayoutWithCoolingSystem from 'components/Layouting/Layouting_whit_coolingSystem';
+// import LayoutingEdges from './components/Layouting/Layouting_edges';
 
 function App() {
   return (
     <>
        <Layouting /> 
-       {/* <LayoutWithCoolingSystem /> */}
+       {/* <LayoutingEdges /> */}
     </>
   )
   // return (
