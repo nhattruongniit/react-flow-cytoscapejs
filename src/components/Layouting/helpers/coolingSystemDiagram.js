@@ -86,6 +86,7 @@ function renderNodeSecondaryChilled(data, hashMapOrderLoop) {
         size: {
           maxWidth: 65
         },
+        lineCss: 'lineCss isCoolingCoil',
         position: {
           x: 20,
           y: 120
@@ -176,6 +177,8 @@ function renderNodeSecondaryChilled(data, hashMapOrderLoop) {
           x: nodeX,
           y: nodeY
         },
+        line: 4,
+        lineCss: 'lineCss isPlateHeat' 
       }
     }
     return {
@@ -363,6 +366,8 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
           x: nodeX,
           y: nodeY
         },
+        line: 4,
+        lineCss: 'lineCss isLittleChiller'
       }
     }
     if(isBigChiller) {
@@ -383,6 +388,8 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
           x: nodeX,
           y: nodeY
         },
+        line: 4,
+        lineCss: 'lineCss isBigChiller'
       }
     }
     if(isDistrictCooling) {
@@ -403,6 +410,8 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
           x: nodeX,
           y: nodeY
         },
+        line: 2,
+        lineCss: 'lineCss isPurchasedCooling'
       }
     }
     return {
@@ -585,6 +594,8 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
           x: nodeX,
           y: nodeY
         },
+        line: 2,
+        lineCss: 'lineCss isCoolingTower'
       }
     }
     return {

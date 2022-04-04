@@ -14,14 +14,14 @@ function InletTarget({ nodeItem, isHorizontal, leftStyle }) {
     <>
       {filterNodeNoTo.map((node, idx) => (
         <div key={idx}>
-          <span
+          {/* <span
             className={clsx(
               isHorizontal === 'LR' ? "inPortHorizontal" : "inPort"
             )}
             style={{ top: idx === 0 ? leftStyle : `${idx * (leftStyle / filterNodeNoTo.length)}px` }}
           >
             in
-          </span>
+          </span> */}
           <Handle 
             key={node}
             id={node}

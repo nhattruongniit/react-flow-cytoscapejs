@@ -32,28 +32,6 @@
   bottom: 0;
   left: -2px;
 }
-.primarySupply-mixer-2 .inletNode_position_1::after,
-.primarySupply-mixer-2 .inletNode_position_2::after,
-.primarySupply-splitter-2 .outletNode_position_1::after,
-.primarySupply-splitter-2 .outletNode_position_2::after,
-.condenserDemand-splitter-3 .outletNode_position_1::after,
-.condenserDemand-mixer-3 .inletNode_position_1::after {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -30px;
-  left: 0px;
-  height: 35px;
-  width: 1px;
-  background-color: #140c8d;
-  z-index: 1;
-}
-
-.primarySupply-splitter-2 .outletNode_position_2::after,
-.primarySupply-splitter-2 .outletNode_position_1::after,
-.condenserDemand-splitter-3 .outletNode_position_1::after {
-  top: -30px;
-}
 
 .primarySupply-splitter-2 .outletNode_position_2::before,
 .primarySupply-splitter-2 .outletNode_position_3::before {
@@ -90,4 +68,121 @@
 
 .condenserSupply-splitter-3 .splitter {
   width: 170px !important;
+}
+/* 
+#edge-10 {
+  transform: translate(61px, 141px);
+} */
+
+.isCoolingCoil::before,
+.isCoolingCoil::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 35px;
+  background-color: #140c8d;
+  z-index: 1;
+  left: 39px;
+}
+
+.isCoolingCoil::before {
+  bottom: 45px;
+}
+
+.isCoolingCoil::after {
+  top: 45px;
+}
+
+.lineCss .line-0,
+.lineCss .line-1,
+.lineCss .line-2,
+.lineCss .line-3 {
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 35px;
+  background-color: #140c8d;
+  z-index: 1;
+  left: 39px;
+}
+
+.isPlateHeat .line-0 {
+  bottom: 44px;
+  left: 18px;
+}
+
+.isPlateHeat .line-1 {
+  bottom: 44px;
+  left: 49px;
+}
+
+.isPlateHeat .line-2 {
+  top: 44px;
+  left: 18px;
+}
+
+.isPlateHeat .line-3 {
+  top: 44px;
+  left: 49px;
+}
+
+.isPurchasedCooling .line-0 {
+  bottom: 44px;
+  left: 28px;
+}
+
+.isPurchasedCooling .line-1 {
+  top: 44px;
+  left: 28px;
+}
+
+.isLittleChiller .line-0 {
+  bottom: 44px;
+  left: 18px;
+}
+
+.isLittleChiller .line-1 {
+  bottom: 44px;
+  left: 44px;
+}
+
+.isLittleChiller .line-2 {
+  top: 44px;
+  left: 18px;
+}
+
+.isLittleChiller .line-3 {
+  top: 44px;
+  left: 44px;
+}
+
+.isBigChiller .line-0 {
+  bottom: 44px;
+  left: 13px;
+}
+
+.isBigChiller .line-1 {
+  bottom: 44px;
+  left: 39px;
+}
+
+.isBigChiller .line-2 {
+  top: 44px;
+  left: 13px;
+}
+
+.isBigChiller .line-3 {
+  top: 44px;
+  left: 39px;
+}
+
+.isCoolingTower .line-0 {
+  bottom: 44px;
+  left: 23px;
+}
+
+.isCoolingTower .line-1 {
+  top: 44px;
+  left: 23px;
 }

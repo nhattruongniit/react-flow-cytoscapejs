@@ -20,7 +20,6 @@ import { dataPlantLoop79 } from '../../mocks/dataPlantLoop-79';
 import InletTarget from './components/InletTarget';
 import OutletSource from './components/OutletSource';
 import NodeItem from './components/NodeItem';
-import CustomEdge from './components/CustomEdge';
 
 // configs
 import { nodeWidth, nodeHeight } from 'configs';
@@ -78,21 +77,34 @@ const hashMapOrderLoop = Object.keys(nodesLoop).reduce((acc, curr, index) => {
 
 const dataNodes = coolingSystemDiagram(dataPlantLoop79, nodesLoop, hashMapOrderLoop);
 const dataEdges = dataPlantLoop79.reduce((loopMap, loopItem) => {
-  if(loopItem.group === 'edges') {
-    const edgeItem = {
-      // ...loopItem.data,
-      id: loopItem.data.id.toString(), 
-      source: loopItem.data.source.toString(), 
-      target: loopItem.data.target.toString(), 
-      animated: true, 
-      // group: 'edges',
-      // type: 'default', 
-      label: loopItem.data.id.toString(),
-      // targetHandle: loopItem.data.to_node.toString(),
-      // sourceHandle: loopItem.data.from_node.toString()
+  // if(loopItem.group === 'edges') {
+  //   const edgeItem = {
+  //     ...loopItem.data,
+  //     id: loopItem.data.id.toString(), 
+  //     source: loopItem.data.source.toString(), 
+  //     target: loopItem.data.target.toString(), 
+  //     animated: true, 
+  //     type: 'custom', 
+  //     data: { text: loopItem.data.id.toString() },
+  //     targetHandle: loopItem.data.to_node.toString(),
+  //     sourceHandle: loopItem.data.from_node.toString()
+  //   }
+  //   loopMap.edges.push(edgeItem);
+  // }
+  if(loopItem.data.target === 4932) {
+      const edgeItem = {
+        ...loopItem.data,
+        id: loopItem.data.id.toString(), 
+        source: loopItem.data.source.toString(), 
+        target: loopItem.data.target.toString(), 
+        animated: true, 
+        type: 'custom', 
+        data: { text: loopItem.data.id.toString() },
+        targetHandle: loopItem.data.to_node.toString(),
+        sourceHandle: loopItem.data.from_node.toString()
+      }
+      loopMap.edges.push(edgeItem);
     }
-    loopMap.edges.push(edgeItem);
-  }
   return loopMap
 }, {
   edges: [],
@@ -104,12 +116,12 @@ const LayoutFlow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(dataEdges.edges);
   const [nodes, , onNodesChange] = useNodesState(dataNodes);
 
-  // const onConnect = useCallback(
-  //   (params) => setEdges((eds) => addEdge({ ...params, type: 'default', animated: true }, eds)),
-  //   [setEdges]
-  // );
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
+    [setEdges]
+  );
 
-  const onConnect = (params) => setEdges((eds) => addEdge(params, eds));
+  // const onConnect = (params) => setEdges((eds) => addEdge(params, eds));
 
   const CustomNodeComponent = ({ id, data, ...props}) => {
     const nodeItem = nodes.find(element => element.id === id) 
@@ -167,7 +179,8 @@ const LayoutFlow = () => {
             className={clsx(
               "layouting_label",
               isSplitter && 'splitter',
-              isMixerNode && 'mixer'
+              isMixerNode && 'mixer',
+              nodeItem.lineCss
               // nodeItem.classCss
             )}
           >
@@ -197,6 +210,56 @@ const LayoutFlow = () => {
     );
   };
 
+  const CustomEdge = ({
+    id,
+    sourceX,
+    sourceY,
+    targetX,
+    targetY,
+    sourcePosition,
+    targetPosition,
+    style = {},
+    data,
+    markerEnd,
+  }) => {
+    console.log('custom edge: ',  targetX);
+
+    const edgePath = getBezierPath({
+      sourceX,
+      sourceY,
+      targetX,
+      targetY,
+    });
+  
+    return (
+      <>
+        <path
+          id={id}
+          className={clsx(
+            "react-flow__edge-path line",
+            id            
+          )}
+          d={edgePath}
+          markerEnd={markerEnd}
+        />
+        <text>
+          <textPath
+            href={`#${id}`}
+            style={{ fontSize: '12px' }}
+            startOffset="50%"
+            textAnchor="middle"
+          >
+            {data.text}
+          </textPath>
+        </text>
+        {/* <div className="line">
+        {data.text}
+          </div> */}
+      </>
+    );
+  }
+  
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const nodeTypes = useMemo(() => ({ special: CustomNodeComponent }), []);
   const edgeTypes = useMemo(() => ({ custom: CustomEdge }), []);
@@ -206,14 +269,14 @@ const LayoutFlow = () => {
       <div className="layoutflow coolingCoil">
         <ReactFlow
           nodes={nodes} 
-          edges={edges}
+          // edges={edges}
           nodeTypes={nodeTypes}
-          edgeTypes={edgeTypes}
+          // edgeTypes={edgeTypes}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           snapToGrid
-          fitView
+          // fitView
           attributionPosition="top-right"
         >
           <MiniMap />

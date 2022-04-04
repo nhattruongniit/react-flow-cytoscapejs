@@ -14,14 +14,14 @@ function OutletSource({ nodeItem, isHorizontal, leftStyle }) {
     <>
       {filterNodeNoFrom.map((node, idx) => (
         <div key={idx}>
-          <span
+          {/* <span
             className={clsx(
               isHorizontal === 'LR' ? "outPortHorizontal" : "outPort"
             )}
             style={{ top: idx === 0 ? leftStyle : `${idx * (leftStyle / filterNodeNoFrom.length)}px` }}
           >
             out
-          </span>
+          </span> */}
           <Handle
             key={node}
             type="source"

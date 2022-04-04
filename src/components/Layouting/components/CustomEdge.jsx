@@ -9,12 +9,17 @@ export default function CustomEdge({
   targetY,
   sourcePosition,
   targetPosition,
-  style = {},
+  style = {
+    top: 100
+  },
   data,
   markerEnd,
 }) {
 
-  console.log(id)
+  console.log( sourceX,
+    sourceY,
+    targetX,
+    targetY)
   const edgePath = getBezierPath({
     sourceX,
     sourceY,
@@ -28,10 +33,10 @@ export default function CustomEdge({
     <>
       <path
         id={id}
-        style={style}
         className="react-flow__edge-path"
         d={edgePath}
         markerEnd={markerEnd}
+        style
       />
       <text>
         <textPath
