@@ -41,14 +41,14 @@ function renderNodeSecondaryChilled(data, hashMapOrderLoop) {
     const isTextMain = item.data.text === 'Secondary Chilled Water Loop';
 
     let nodeX = 60;
-    let nodeY = 0;
+    let nodeY = 10;
     let classCss = '';
     if(isConnectorMixer) {
-      nodeY = 30;
+      nodeY = 20;
       classCss = `secondaryDemand-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
-      nodeY = 250;
+      nodeY = 260;
       classCss = `secondaryDemand-splitter-${hashMapOrderLoop[item.key]}`
     }
     if(isByPassDemand) {
@@ -57,12 +57,12 @@ function renderNodeSecondaryChilled(data, hashMapOrderLoop) {
     }
     if(isPipeInlet) {
       nodeX = 160;
-      nodeY = 250;
+      nodeY = 260;
       classCss = `lineDarkBlue`
     }
     if(isPipeOutlet) {
       nodeX = 160;
-      nodeY = 30;
+      nodeY = 20;
       classCss = `lineDarkBlue`
     } 
     if(isTextDemand) {
@@ -87,6 +87,7 @@ function renderNodeSecondaryChilled(data, hashMapOrderLoop) {
           maxWidth: 65
         },
         lineCss: 'lineCss isCoolingCoil',
+        line: 2,
         position: {
           x: 20,
           y: 120
@@ -134,11 +135,11 @@ function renderNodeSecondaryChilled(data, hashMapOrderLoop) {
     let classCss = '';
 
     if(isConnectorMixer) {
-      nodeY = 30;
+      nodeY = 20;
       classCss = `secondarySupply-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
-      nodeY = 250;
+      nodeY = 260;
       classCss = `secondarySupply-splitter-${hashMapOrderLoop[item.key]}`
     }
     if(isByPassSupply) {
@@ -147,11 +148,11 @@ function renderNodeSecondaryChilled(data, hashMapOrderLoop) {
     }
     if(isPump) {
       nodeX = 280;
-      nodeY = 2;
+      nodeY = -8;
     }
     if(isPipeOutlet) {
       nodeX = 275;
-      nodeY = 250;
+      nodeY = 260;
       classCss = `lineDarkBlue`
     }
     if(isTextSupply) {
@@ -241,11 +242,11 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
     let nodeY = 0;
     let classCss = '';
     if(isConnectorMixer) {
-      nodeY = 30;
+      nodeY = 20;
       classCss = `primaryDemand-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
-      nodeY = 250;
+      nodeY = 260;
       classCss = `primaryDemand-splitter-${hashMapOrderLoop[item.key]}`
     }
     if(isByPassDemand) {
@@ -254,12 +255,12 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
     }
     if(isPipeInlet) {
       nodeX = 160;
-      nodeY = 250;
+      nodeY = 260;
       classCss = `lineDarkBlue`
     }
     if(isPipeOutlet) {
       nodeX = 160;
-      nodeY = 30;
+      nodeY = 20;
       classCss = `lineDarkBlue`
     } 
     if(isTextDemand) {
@@ -320,12 +321,12 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
 
     if(isConnectorMixer) {
       nodeX = 420;  
-      nodeY = 30;
+      nodeY = 20;
       classCss = `primarySupply-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
       nodeX = 420;  
-      nodeY = 250;
+      nodeY = 260;
       classCss = `primarySupply-splitter-${hashMapOrderLoop[item.key]}`
     }
  
@@ -335,7 +336,7 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
     }
     if(isPump) {
       nodeX = 280;
-      nodeY = 2;
+      nodeY = -8;
     }
     if(isTextSupply) {
       nodeX = 290;
@@ -344,7 +345,7 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
     }
     if(isPipeOutlet) {
       nodeX = 275;
-      nodeY = 250;
+      nodeY = 260;
       classCss = `lineDarkBlue`
     } 
   
@@ -476,11 +477,11 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
     let nodeY = 0;
     let classCss = '';
     if(isConnectorMixer) {
-      nodeY = 10;
+      nodeY = 0;
       classCss = `condenserDemand-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
-      nodeY = 270;
+      nodeY = 280;
       classCss = `condenserDemand-splitter-${hashMapOrderLoop[item.key]}`
     }
     if(isByPassDemand) {
@@ -490,12 +491,12 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
     }
     if(isPipeInlet) {
       nodeX = 230;
-      nodeY = 270;
+      nodeY = 280;
       classCss = `lineDarkBlue`
     }
     if(isPipeOutlet) {
       nodeX = 230;
-      nodeY = 10;
+      nodeY = 0;
       classCss = `lineDarkBlue`
     } 
     if(isTextDemand) {
@@ -550,11 +551,11 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
     let classCss = '';
 
     if(isConnectorMixer) {
-      nodeY = 10;
+      nodeY = 0;
       classCss = `condenserSupply-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
-      nodeY = 270;
+      nodeY = 280;
       classCss = `condenserSupply-splitter-${hashMapOrderLoop[item.key]}`
     }
     if(isByPassSupply) {
@@ -564,7 +565,7 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
     }
     if(isPump) {
       nodeX = 365;
-      nodeY = -18;
+      nodeY = -28;
     }
     if(isTextSupply) {
       nodeX = 400;
@@ -573,7 +574,7 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
     }
     if(isPipeOutlet) {
       nodeX = 330;
-      nodeY = 270;
+      nodeY = 280;
       classCss = `lineDarkBlue`
     } 
     if(isCoolingTower) {

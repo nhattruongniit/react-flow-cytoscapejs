@@ -74,26 +74,6 @@
   transform: translate(61px, 141px);
 } */
 
-.isCoolingCoil::before,
-.isCoolingCoil::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 1px;
-  height: 35px;
-  background-color: #140c8d;
-  z-index: 1;
-  left: 39px;
-}
-
-.isCoolingCoil::before {
-  bottom: 45px;
-}
-
-.isCoolingCoil::after {
-  top: 45px;
-}
-
 .lineCss .line-0,
 .lineCss .line-1,
 .lineCss .line-2,
@@ -107,6 +87,31 @@
   left: 39px;
 }
 
+.isCoolingCoil .line-0 {
+  bottom: 45px;
+}
+
+.isCoolingCoil .line-1 {
+  top: 45px;
+}
+
+.isCoolingCoil .line-0::before,
+.isCoolingCoil .line-1:before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -2px;
+}
+
+.isCoolingCoil .line-1:before {
+  top: auto;
+  bottom: 0;
+}
+
 .isPlateHeat .line-0 {
   bottom: 44px;
   left: 18px;
@@ -115,6 +120,26 @@
 .isPlateHeat .line-1 {
   bottom: 44px;
   left: 49px;
+}
+
+.isPlateHeat .line-0::before,
+.isPlateHeat .line-1:before,
+.isPlateHeat .line-2::before,
+.isPlateHeat .line-3::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -2px;
+}
+
+.isPlateHeat .line-2::before,
+.isPlateHeat .line-3::before {
+  bottom: 0;
+  top: auto;
 }
 
 .isPlateHeat .line-2 {
@@ -137,6 +162,23 @@
   left: 28px;
 }
 
+.isPurchasedCooling .line-0::before,
+.isPurchasedCooling .line-1:before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -2px;
+}
+
+.isPurchasedCooling .line-1:before {
+  top: auto;
+  bottom: 0;
+}
+
 .isLittleChiller .line-0 {
   bottom: 44px;
   left: 18px;
@@ -155,6 +197,26 @@
 .isLittleChiller .line-3 {
   top: 44px;
   left: 44px;
+}
+
+.isLittleChiller .line-0::before,
+.isLittleChiller .line-1:before,
+.isLittleChiller .line-2::before,
+.isLittleChiller .line-3::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -2px;
+}
+
+.isLittleChiller .line-2::before,
+.isLittleChiller .line-3::before {
+  bottom: 0;
+  top: auto;
 }
 
 .isBigChiller .line-0 {
@@ -177,6 +239,26 @@
   left: 39px;
 }
 
+.isBigChiller .line-0::before,
+.isBigChiller .line-1:before,
+.isBigChiller .line-2::before,
+.isBigChiller .line-3::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -2px;
+}
+
+.isBigChiller .line-2::before,
+.isBigChiller .line-3::before {
+  bottom: 0;
+  top: auto;
+}
+
 .isCoolingTower .line-0 {
   bottom: 44px;
   left: 23px;
@@ -185,4 +267,21 @@
 .isCoolingTower .line-1 {
   top: 44px;
   left: 23px;
+}
+
+.isCoolingTower .line-0::before,
+.isCoolingTower .line-1:before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background-color: #140c8d;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -2px;
+}
+
+.isCoolingTower .line-1::before {
+  bottom: 0;
+  top: auto;
 }
