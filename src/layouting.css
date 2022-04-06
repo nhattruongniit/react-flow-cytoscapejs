@@ -296,9 +296,9 @@
   background-color: transparent;
 }
 
-.coolingCoil .react-flow__handle.connectable {
+/* .coolingCoil .react-flow__handle.connectable {
   display: none;
-}
+} */
 
 .lineDarkBlue {
   transform: rotate(0) !important;
@@ -413,7 +413,7 @@
   content: "";
   width: 5px;
   height: 5px;
-  background-color: #140c8d;
+  background-color: pink;
   border-radius: 50%;
   position: absolute;
   bottom: 0;
@@ -438,7 +438,7 @@
   content: "";
   width: 5px;
   height: 5px;
-  background-color: #140c8d;
+  background-color: pink;
   border-radius: 50%;
   position: absolute;
   top: 0;

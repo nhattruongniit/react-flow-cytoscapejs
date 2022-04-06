@@ -7,7 +7,8 @@ import { ReactComponent as PumpIcon } from 'assets/images/pump-svg.svg';
 // import { ReactComponent as SplitterIcon } from 'assets/images/supply-splitter.svg';
 import { ReactComponent as MusterIcon } from 'assets/images/muster-bottom.svg';
 
-function NodeItem({ data, nodeItem, isPump, isMixerNode, isSplitter, isPipe, isMuster }) {
+function NodeItem({ data, nodeItem, isPump, isMixerNode, isSplitter, isPipe, isMuster, isConnectable }) {
+
 
   if(isPump) {
     return (

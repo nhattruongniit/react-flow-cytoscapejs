@@ -9,7 +9,9 @@ import ReactFlow, {
   addEdge,
   MiniMap,
   Background,
-  getBezierPath, getMarkerEnd
+  getBezierPath, getMarkerEnd,
+  getEdgeCenter,
+  getSmoothStepPath, removeElements 
 } from 'react-flow-renderer';
 import dagre from 'dagre';
 import clsx from 'clsx';
@@ -77,34 +79,34 @@ const hashMapOrderLoop = Object.keys(nodesLoop).reduce((acc, curr, index) => {
 
 const dataNodes = coolingSystemDiagram(dataPlantLoop79, nodesLoop, hashMapOrderLoop);
 const dataEdges = dataPlantLoop79.reduce((loopMap, loopItem) => {
-  // if(loopItem.group === 'edges') {
-  //   const edgeItem = {
-  //     ...loopItem.data,
-  //     id: loopItem.data.id.toString(), 
-  //     source: loopItem.data.source.toString(), 
-  //     target: loopItem.data.target.toString(), 
-  //     animated: true, 
-  //     type: 'custom', 
-  //     data: { text: loopItem.data.id.toString() },
-  //     targetHandle: loopItem.data.to_node.toString(),
-  //     sourceHandle: loopItem.data.from_node.toString()
-  //   }
-  //   loopMap.edges.push(edgeItem);
-  // }
-  if(loopItem.data.target === 4932) {
-      const edgeItem = {
-        ...loopItem.data,
-        id: loopItem.data.id.toString(), 
-        source: loopItem.data.source.toString(), 
-        target: loopItem.data.target.toString(), 
-        animated: true, 
-        type: 'custom', 
-        data: { text: loopItem.data.id.toString() },
-        targetHandle: loopItem.data.to_node.toString(),
-        sourceHandle: loopItem.data.from_node.toString()
-      }
-      loopMap.edges.push(edgeItem);
+  if(loopItem.group === 'edges') {
+    const edgeItem = {
+      ...loopItem.data,
+      id: loopItem.data.id.toString(), 
+      source: loopItem.data.source.toString(), 
+      target: loopItem.data.target.toString(), 
+      animated: true, 
+      type: 'custom', 
+      data: { text: loopItem.data.id.toString() },
+      targetHandle: loopItem.data.to_node.toString(),
+      sourceHandle: loopItem.data.from_node.toString()
     }
+    loopMap.edges.push(edgeItem);
+  }
+  // if(loopItem.data.target === 4932) {
+  //     const edgeItem = {
+  //       ...loopItem.data,
+  //       id: loopItem.data.id.toString(), 
+  //       source: loopItem.data.source.toString(), 
+  //       target: loopItem.data.target.toString(), 
+  //       animated: true, 
+  //       type: 'custom', 
+  //       data: { text: loopItem.data.id.toString() },
+  //       targetHandle: loopItem.data.to_node.toString(),
+  //       sourceHandle: loopItem.data.from_node.toString()
+  //     }
+  //     loopMap.edges.push(edgeItem);
+  //   }
   return loopMap
 }, {
   edges: [],
@@ -116,12 +118,12 @@ const LayoutFlow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(dataEdges.edges);
   const [nodes, , onNodesChange] = useNodesState(dataNodes);
 
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
-    [setEdges]
-  );
+  // const onConnect = useCallback(
+  //   (params) => setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
+  //   [setEdges]
+  // );
 
-  // const onConnect = (params) => setEdges((eds) => addEdge(params, eds));
+  const onConnect = (params) => setEdges((eds) => addEdge(params, eds));
 
   const CustomNodeComponent = ({ id, data, ...props}) => {
     const nodeItem = nodes.find(element => element.id === id) 
@@ -220,44 +222,89 @@ const LayoutFlow = () => {
     targetPosition,
     style = {},
     data,
-    markerEnd,
+    arrowHeadType,
+    markerEndId,
+    borderRadius = 5,
   }) => {
-    console.log('custom edge: ',  targetX);
+    const edgePath = getBezierPath({ sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition });
 
-    const edgePath = getBezierPath({
-      sourceX,
-      sourceY,
-      targetX,
-      targetY,
-    });
-  
-    return (
-      <>
-        <path
-          id={id}
-          className={clsx(
-            "react-flow__edge-path line",
-            id            
-          )}
-          d={edgePath}
-          markerEnd={markerEnd}
-        />
-        <text>
-          <textPath
-            href={`#${id}`}
-            style={{ fontSize: '12px' }}
-            startOffset="50%"
-            textAnchor="middle"
-          >
-            {data.text}
-          </textPath>
-        </text>
-        {/* <div className="line">
-        {data.text}
-          </div> */}
-      </>
-    );
+    const markerEnd = getMarkerEnd(arrowHeadType, markerEndId);
+
+    const [Ratio, setRatio] = useState(15);
+
+    const [centerX, centerY] = getEdgeCenter({ sourceX, sourceY, targetX, targetY });
+
+return (
+    <>
+        <g>
+            <path id={id} style={{ ...style, stroke: "#BBC7D5" }} className="react-flow__edge-path" d={edgePath} markerEnd={markerEnd} />
+
+            <g onMouseEnter={
+                () => {
+                    setRatio(20)
+                }
+            } onMouseLeave={
+                () => {
+                    setRatio(15)
+                }
+            } width={20} style={{
+                width: 20
+            }}>
+                
+            </g>
+        </g>
+    </>
+);
   }
+
+  // const CustomEdge = ({
+  //   id,
+  //   sourceX,
+  //   sourceY,
+  //   targetX,
+  //   targetY,
+  //   sourcePosition,
+  //   targetPosition,
+  //   style = {},
+  //   data,
+  //   markerEnd,
+  // }) => {
+  //   console.log('custom edge: ',  targetX);
+
+  //   const edgePath = getBezierPath({
+  //     sourceX,
+  //     sourceY,
+  //     targetX,
+  //     targetY,
+  //   });
+  
+  //   return (
+  //     <>
+  //       <path
+  //         id={id}
+  //         className={clsx(
+  //           "react-flow__edge-path line",
+  //           id            
+  //         )}
+  //         d={edgePath}
+  //         markerEnd={markerEnd}
+  //       />
+  //       <text>
+  //         <textPath
+  //           href={`#${id}`}
+  //           style={{ fontSize: '12px' }}
+  //           startOffset="50%"
+  //           textAnchor="middle"
+  //         >
+  //           {data.text}
+  //         </textPath>
+  //       </text>
+  //       {/* <div className="line">
+  //       {data.text}
+  //         </div> */}
+  //     </>
+  //   );
+  // }
   
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -269,9 +316,9 @@ const LayoutFlow = () => {
       <div className="layoutflow coolingCoil">
         <ReactFlow
           nodes={nodes} 
-          // edges={edges}
+          edges={edges}
           nodeTypes={nodeTypes}
-          // edgeTypes={edgeTypes}
+          edgeTypes={edgeTypes}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
