@@ -78,7 +78,6 @@ function NodeItem({ data, nodeItem, isPump, isMixerNode, isSplitter, isPipe, isM
 
   return (
     <>
-
       {data.text}
       {nodeItem?.line && Array.from(Array(nodeItem.line).keys()).map(item => (
         <div key={item} className={`line-${item}`} />

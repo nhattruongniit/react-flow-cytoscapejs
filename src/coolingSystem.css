@@ -81,7 +81,7 @@
   display: block;
   position: absolute;
   width: 1px;
-  height: 35px;
+  height: 20px;
   background-color: #140c8d;
   z-index: 1;
   left: 39px;
@@ -284,4 +284,171 @@
 .isCoolingTower .line-1::before {
   bottom: 0;
   top: auto;
+}
+
+
+[data-handleid="Cooling Coil Water Outlet Node"] {
+  top: -19px !important;
+  left: 37px;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Cooling Coil Water Inlet Node"] {
+  top: 70px !important;
+  left: 37px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.secondaryDemand-byPass-1 [data-handleid="CW Sec Demand Bypass Pipe Outlet Node"] {
+  right: 14px !important;
+  top: 8.5px !important;
+  border-radius: 100% !important;
+}
+
+.secondaryDemand-byPass-1 [data-handleid="CW Sec Demand Bypass Pipe Inlet Node"] {
+  left: 14px !important;
+  top: 8.5px !important;
+  border-radius: 100% !important;
+}
+
+.secondaryDemand-mixer-1 [data-handleid="inlet_node2"] {
+  left: 37px !important;
+  top: 54.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.secondaryDemand-mixer-1 [data-handleid="inlet_node1"] {
+  top: 56px !important;
+  left: -2.5px !important;
+  border-radius: 100% !important;
+}
+
+.secondaryDemand-splitter-1 [data-handleid="outlet_node1"] {
+  top: -38px !important;
+  left: -2.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.secondaryDemand-splitter-1 [data-handleid="outlet_node2"] {
+  left: 37px !important;
+  top: -39.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.secondaryDemand-splitter-1 [data-handleid="inlet_node"] {
+  left: 95px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+  z-index: 10;
+}
+
+.secondaryDemand-mixer-1 [data-handleid="outlet_node"] {
+  right: 46px !important;
+  top: 8px !important;
+  border-radius: 100% !important;
+}
+
+.secondaryDemand-isPipeOutlet-1 [data-handleid="CW Sec Demand Exit Pipe Inlet Node"] {
+  left: 0px !important;
+  top: 8px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.secondaryDemand-isPipeInlet-1 [data-handleid="CW Sec Demand Entrance Pipe Outlet Node"] {
+  top: 9px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.secondarySupply-splitter-1 {
+  transform: scale(-1, -1);
+}
+
+.secondarySupply-mixer-1 {
+  transform: scale(-1, -1);
+}
+
+.secondarySupply-mixer-1 [data-handleid="outlet_node"] {
+  top: 9px !important;
+  border-radius: 100% !important;
+  right: 45px !important;
+}
+
+.secondarySupply-isPipeOutlet-1 [data-handleid="CW Sec Supply Exit Pipe Inlet Node"] {
+  top: 9px !important;
+  border-radius: 100% !important;
+  left: 70px !important;
+  opacity: 0;
+}
+
+.secondarySupply-mixer-1 [data-handleid="inlet_node2"] {
+  top: 55px !important;
+  border-radius: 100% !important;
+  left: 38px !important;
+  opacity: 0;
+}
+
+.secondarySupply-byPass-1 [data-handleid="CW Sec Supply Bypass Outlet Node"] {
+  top: 8.5px !important;
+  border-radius: 100% !important;
+  left: 17px !important;
+}
+
+.secondarySupply-byPass-1 [data-handleid="CW Sec Supply Bypass Inlet Node"] {
+  top: 8.5px !important;
+  left: 132px  !important;
+  border-radius: 100% !important;
+}
+
+.secondarySupply-splitter-1 [data-handleid="outlet_node2"] {
+  right: 106px !important;
+  top: -38.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.secondarySupply-splitter-1 [data-handleid="outlet_node1"] {
+  right: 147px !important;
+  top: -38px !important;
+  border-radius: 100% !important;
+}
+
+.secondarySupply-mixer-1 [data-handleid="inlet_node1"] {
+  left: -2px !important;
+  top: 55px !important;
+  border-radius: 100% !important;
+}
+
+[data-handleid="PHE Supply Inlet Node"] {
+  left: 15.5px !important;
+  top: -17.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="PHE Supply Outlet Node"] {
+  right: 42.5px !important;
+  top: 69.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.secondarySupply-splitter-1 [data-handleid="inlet_node"] {
+  left: 96px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+  z-index: 2;
+}
+
+.secondarySupply-isPump-1 [data-handleid="CW Sec Circ Pump Outlet Node"] {
+  right: 65px !important;
+  top: 36px !important;
+  border-radius: 100% !important;
+  opacity: 0;
 }

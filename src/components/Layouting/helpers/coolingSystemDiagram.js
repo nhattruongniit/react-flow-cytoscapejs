@@ -54,16 +54,17 @@ function renderNodeSecondaryChilled(data, hashMapOrderLoop) {
     if(isByPassDemand) {
       nodeX = 26;
       nodeY = 140;
+      classCss = `secondaryDemand-byPass-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeInlet) {
-      nodeX = 160;
-      nodeY = 260;
-      classCss = `lineDarkBlue`
+      nodeX = 170;
+      nodeY = 261.5;
+      classCss = `lineDarkBlue rotate180deg secondaryDemand-isPipeInlet-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeOutlet) {
-      nodeX = 160;
+      nodeX = 170;
       nodeY = 20;
-      classCss = `lineDarkBlue`
+      classCss = `lineDarkBlue secondaryDemand-isPipeOutlet-${hashMapOrderLoop[item.key]}`
     } 
     if(isTextDemand) {
       nodeX = 45;
@@ -130,39 +131,42 @@ function renderNodeSecondaryChilled(data, hashMapOrderLoop) {
     const isByPassSupply = regexByPass.test(item.connecting_node);
     const isPipeOutlet = regexOutlet.test(item.label) && regexOnlyPipe.test(item.class);
 
-    let nodeX = 300;
+    let nodeX = 330;
     let nodeY = 0;
     let classCss = '';
 
     if(isConnectorMixer) {
-      nodeY = 20;
+      nodeY = 260;
       classCss = `secondarySupply-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
-      nodeY = 260;
+      nodeY = 20;
       classCss = `secondarySupply-splitter-${hashMapOrderLoop[item.key]}`
     }
     if(isByPassSupply) {
-      nodeX = 335;
+      nodeX = 364;
       nodeY = 140;
+      classCss = `secondarySupply-byPass-${hashMapOrderLoop[item.key]}`
     }
     if(isPump) {
-      nodeX = 280;
+      nodeX = 300;
       nodeY = -8;
+      classCss = `secondarySupply-isPump-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeOutlet) {
       nodeX = 275;
       nodeY = 260;
-      classCss = `lineDarkBlue`
+      classCss = `lineDarkBlue secondarySupply-isPipeOutlet-${hashMapOrderLoop[item.key]} `
     }
     if(isTextSupply) {
-      nodeX = 320;
+      nodeX = 350;
       nodeY = 135;
       classCss = 'transparent nodeOnlyText';
     }
     if(isHeatExchanger) {
-      nodeX = 430;
+      nodeX = 460;
       nodeY = 120;
+      classCss = `secondarySupply-isPipeOutlet-${hashMapOrderLoop[item.key]} `
       return {
         ...item,
         parentNode: hashMapOrderLoop[item.key],
@@ -252,16 +256,17 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
     if(isByPassDemand) {
       nodeX = 26;
       nodeY = 140;
+      classCss = `primaryDemand-byPass-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeInlet) {
       nodeX = 160;
       nodeY = 260;
-      classCss = `lineDarkBlue`
+      classCss = `lineDarkBlue primaryDemand-isPipeInlet-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeOutlet) {
       nodeX = 160;
       nodeY = 20;
-      classCss = `lineDarkBlue`
+      classCss = `lineDarkBlue primaryDemand-isPipeOutlet-${hashMapOrderLoop[item.key]}`
     } 
     if(isTextDemand) {
       nodeX = 45;
@@ -492,12 +497,12 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
     if(isPipeInlet) {
       nodeX = 230;
       nodeY = 280;
-      classCss = `lineDarkBlue`
+      classCss = `lineDarkBlue condenserDemand-isPipeInlet-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeOutlet) {
       nodeX = 230;
       nodeY = 0;
-      classCss = `lineDarkBlue`
+      classCss = `lineDarkBlue condenserDemand-isPipeOutlet-${hashMapOrderLoop[item.key]}`
     } 
     if(isTextDemand) {
       nodeX = 110;
@@ -625,10 +630,10 @@ export const coolingSystemDiagram = (data, nodesLoop, hashMapOrderLoop) => {
   const nodesParent = Object.keys(nodesLoop).reduce((nodeMap, nodeKey, index) => {
     // push parent node item
     const order = index + 1;
-    let x = 420;
+    let x = 480;
 
     if(order === 3) {
-      x = 440
+      x = 500
     }
 
     const nodeObj = {

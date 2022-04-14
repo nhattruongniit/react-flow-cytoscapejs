@@ -32,8 +32,13 @@ code {
 }
 
 .rotate90deg {
-  transform: rotate(90deg) !important;
+  transform: rotate(270deg) !important;
 }
+
+.nodeStyles.rotate180deg {
+  transform: rotate(180deg) !important;
+}
+
 
 .transparent {
   background-color: transparent !important;

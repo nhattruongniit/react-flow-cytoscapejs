@@ -86,7 +86,7 @@ const dataEdges = dataPlantLoop79.reduce((loopMap, loopItem) => {
       source: loopItem.data.source.toString(), 
       target: loopItem.data.target.toString(), 
       animated: true, 
-      type: 'custom', 
+      type: 'step', 
       data: { text: loopItem.data.id.toString() },
       targetHandle: loopItem.data.to_node.toString(),
       sourceHandle: loopItem.data.from_node.toString()
