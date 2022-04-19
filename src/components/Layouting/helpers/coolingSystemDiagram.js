@@ -259,12 +259,12 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
       classCss = `primaryDemand-byPass-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeInlet) {
-      nodeX = 160;
+      nodeX = 180;
       nodeY = 260;
       classCss = `lineDarkBlue primaryDemand-isPipeInlet-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeOutlet) {
-      nodeX = 160;
+      nodeX = 180;
       nodeY = 20;
       classCss = `lineDarkBlue primaryDemand-isPipeOutlet-${hashMapOrderLoop[item.key]}`
     } 
@@ -325,26 +325,26 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
     let classCss = '';
 
     if(isConnectorMixer) {
-      nodeX = 420;  
+      nodeX = 460;  
       nodeY = 20;
       classCss = `primarySupply-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
-      nodeX = 420;  
+      nodeX = 460;  
       nodeY = 260;
       classCss = `primarySupply-splitter-${hashMapOrderLoop[item.key]}`
     }
  
     if(isByPassSupply) {
-      nodeX = 305;
+      nodeX = 345;
       nodeY = 140;
     }
     if(isPump) {
-      nodeX = 280;
+      nodeX = 300;
       nodeY = -8;
     }
     if(isTextSupply) {
-      nodeX = 290;
+      nodeX = 330;
       nodeY = 135;
       classCss = 'transparent nodeOnlyText';
     }
@@ -355,7 +355,7 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
     } 
   
     if(isLittleChiller) {
-      nodeX = 475;
+      nodeX = 515;
       nodeY = 120;
       return {
         ...item,
@@ -377,7 +377,7 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
       }
     }
     if(isBigChiller) {
-      nodeX = 555;
+      nodeX = 595;
       nodeY = 120;
       return {
         ...item,
@@ -399,7 +399,7 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
       }
     }
     if(isDistrictCooling) {
-      nodeX = 395;
+      nodeX = 435;
       nodeY = 120;
       return {
         ...item,
@@ -490,17 +490,17 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
       classCss = `condenserDemand-splitter-${hashMapOrderLoop[item.key]}`
     }
     if(isByPassDemand) {
-      nodeX = 84;
+      nodeX = 107;
       nodeY = 130;
       classCss = `condenserDemand-bypass-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeInlet) {
-      nodeX = 230;
+      nodeX = 250;
       nodeY = 280;
       classCss = `lineDarkBlue condenserDemand-isPipeInlet-${hashMapOrderLoop[item.key]}`
     }
     if(isPipeOutlet) {
-      nodeX = 230;
+      nodeX = 250;
       nodeY = 0;
       classCss = `lineDarkBlue condenserDemand-isPipeOutlet-${hashMapOrderLoop[item.key]}`
     } 
@@ -510,7 +510,7 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
       classCss = 'transparent nodeOnlyText';
     }
     if(isTextMain) {
-      nodeX = 240;
+      nodeX = 310;
       nodeY = 130;
       classCss = 'transparent nodeOnlyTextMain';
     }
@@ -551,39 +551,41 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
     const isByPassSupply = regexByPass.test(item.label) && item.loop.includes('Condenser Loop:supply');
     const isPipeOutlet = regexOutlet.test(item.label) && regexOnlyPipe.test(item.class);
 
-    let nodeX = 385;
+    let nodeX = 425;
     let nodeY = 0;
     let classCss = '';
 
     if(isConnectorMixer) {
+      nodeX = 475;
       nodeY = 0;
       classCss = `condenserSupply-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
+      nodeX = 475;
       nodeY = 280;
       classCss = `condenserSupply-splitter-${hashMapOrderLoop[item.key]}`
     }
     if(isByPassSupply) {
-      nodeX = 408;
+      nodeX = 521;
       nodeY = 130;
       classCss = `condenserSupply-bypass-${hashMapOrderLoop[item.key]}`
     }
     if(isPump) {
-      nodeX = 365;
+      nodeX = 375;
       nodeY = -28;
     }
     if(isTextSupply) {
-      nodeX = 400;
+      nodeX = 490;
       nodeY = 140;
       classCss = 'transparent nodeOnlyText';
     }
     if(isPipeOutlet) {
-      nodeX = 330;
+      nodeX = 350;
       nodeY = 280;
       classCss = `lineDarkBlue`
     } 
     if(isCoolingTower) {
-      nodeX = 510;
+      nodeX = 600;
       nodeY = 120;
       return {
         ...item,
@@ -630,10 +632,10 @@ export const coolingSystemDiagram = (data, nodesLoop, hashMapOrderLoop) => {
   const nodesParent = Object.keys(nodesLoop).reduce((nodeMap, nodeKey, index) => {
     // push parent node item
     const order = index + 1;
-    let x = 480;
+    let x = 450;
 
     if(order === 3) {
-      x = 500
+      x = 475
     }
 
     const nodeObj = {

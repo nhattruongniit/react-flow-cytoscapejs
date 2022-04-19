@@ -439,6 +439,20 @@
   opacity: 0;
 }
 
+[data-handleid="PHE Demand Outlet Node"] {
+  right: 11px !important;
+  top: -17px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="PHE Demand Inlet Node"] {
+  left: 47px !important;
+  top: 69px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
 .secondarySupply-splitter-1 [data-handleid="inlet_node"] {
   left: 96px !important;
   top: 9px !important;
@@ -449,6 +463,46 @@
 .secondarySupply-isPump-1 [data-handleid="CW Sec Circ Pump Outlet Node"] {
   right: 65px !important;
   top: 36px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primaryDemand-mixer-2 [data-handleid="inlet_node1"] {
+  left: -2px !important;
+  top: 55px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primaryDemand-mixer-2 [data-handleid="inlet_node2"] {
+  left: 37px !important;
+  top: 54.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primaryDemand-byPass-2 [data-handleid="CW Primary Demand Bypass Outlet Node"] {
+  right: 14px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+}
+
+.primaryDemand-byPass-2 [data-handleid="CW Primary Demand Bypass Inlet Node"] {
+  left: 15px !important;
+  top: 8px !important;
+  border-radius: 100% !important;
+}
+
+.primaryDemand-splitter-2 [data-handleid="outlet_node1"] {
+  right: 107px !important;
+  top: -39px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primaryDemand-splitter-2 [data-handleid="outlet_node2"] {
+  right: 146px !important;
+  top: -39.5px !important;
   border-radius: 100% !important;
   opacity: 0;
 }
