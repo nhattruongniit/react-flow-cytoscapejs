@@ -366,6 +366,10 @@
   opacity: 0;
 }
 
+.primarySupply-mixer-2, .primarySupply-splitter-2, .condenserSupply-splitter-3, .condenserSupply-mixer-3 {
+  transform: scale(-1, -1);
+}
+
 .secondarySupply-splitter-1 {
   transform: scale(-1, -1);
 }
@@ -503,6 +507,366 @@
 .primaryDemand-splitter-2 [data-handleid="outlet_node2"] {
   right: 146px !important;
   top: -39.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primaryDemand-isPipeOutlet-2 [data-handleid="CW Primary Demand Exit Pipe Inlet Node"] {
+  left: -1px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primaryDemand-mixer-2 [data-handleid="outlet_node"] {
+  right: 47px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primaryDemand-splitter-2 [data-handleid="inlet_node"] {
+  left: 96px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+  z-index: 1;
+} 
+
+.primaryDemand-isPipeInlet-2 [data-handleid="CW Primary Demand Entrance Pipe Outlet Node"] {
+  right: 69px !important;
+  top: 8px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+} 
+
+.primarySupply-mixer-2 [data-handleid="outlet_node"] {
+  right: -73px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+} 
+
+.primarySupply-isPipeOutlet-2 [data-handleid="CW Primary Supply Side Exit Pipe Inlet Node"] {
+  left: 70px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+} 
+
+.primarySupply-isByPassSupply-2 [data-handleid="CW Primary Supply Bypass Inlet Node"] {
+  left: 129px !important;
+  top: 8px !important;
+  border-radius: 100% !important;
+} 
+
+.primarySupply-isByPassSupply-2 [data-handleid="CW Primary Supply Bypass Outlet Node"] {
+  right: 129px !important;
+  top: 8px !important;
+  border-radius: 100% !important;
+} 
+
+.primarySupply-splitter-2 [data-handleid="outlet_node4"] {
+  right: -43px !important;
+  top: -38.25px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+} 
+
+.primarySupply-mixer-2 [data-handleid="inlet_node4"] {
+  left: 188px !important;
+  top: 55.75px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+} 
+
+.primarySupply-splitter-2 [data-handleid="outlet_node3"] {
+  right: 2px !important;
+  top: -38.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+} 
+
+[data-handleid="Purchased Cooling Inlet Node"] {
+  left: 26px !important;
+  top: -18px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+} 
+
+[data-handleid="Purchased Cooling Outlet Node"] {
+  right: 31px !important;
+  top: 70px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+} 
+
+.primarySupply-mixer-2 [data-handleid="inlet_node3"] {
+  left: 142px !important;
+  top: 55.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+/* [data-handleid="Little Chiller Inlet Node"] {
+  right: 31px !important;
+  top: 70px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}  */
+
+[data-handleid="Big Chiller Inlet Node"] {
+  left: 11px !important;
+  top: -17px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Big Chiller Outlet Node"] {
+  right: 39px !important;
+  top: 69px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primarySupply-splitter-2 [data-handleid="outlet_node2"] {
+  right: 147px !important;
+  top: -38.75px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primarySupply-mixer-2 [data-handleid="inlet_node2"] {
+  left: -2px !important;
+  top: 56.25px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primarySupply-mixer-2  [data-handleid="inlet_node1"] {
+  left: 72px !important;
+  top: 55px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Little Chiller Outlet Node"] {
+  right: 42px !important;
+  top: 69px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Little Chiller Inlet Node"] {
+  left: 15px !important;
+  top: -18px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="CW Primary Pump Outlet Node"] {
+  right: 65px !important;
+  top: 36px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Little Chiller Condenser Outlet Node"] {
+  right: 15px !important;
+  top: -17.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primarySupply-splitter-2 [data-handleid="outlet_node1"] {
+  right: 72px !important;
+  top: -38px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.primarySupply-splitter-2 [data-handleid="inlet_node"] {
+  left: 217px !important;
+  top: 8px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserDemand-mixer-3 [data-handleid="inlet_node2"] {
+  left: -2px !important;
+  top: 75px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Big Chiller Condenser Outlet Node"] {
+  right: 12px !important;
+  top: -18.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Big Chiller Condenser Inlet Node"] {
+  left: 36px !important;
+  top: 69.5px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserDemand-mixer-3 [data-handleid="inlet_node1"] {
+  left: 73px !important;
+  top: 75px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserDemand-splitter-3 [data-handleid="outlet_node1"] {
+  right: 71px !important;
+  top: -59px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserDemand-mixer-3 [data-handleid="inlet_node3"] {
+  left: 107px !important;
+  top: 76px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserDemand-bypass-3 [data-handleid="Cond Demand Bypass Outlet Node"] {
+  right: 17px !important;
+  top: 8px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserDemand-bypass-3 [data-handleid="Cond Demand Bypass Inlet Node"] {
+  left: 16px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserDemand-splitter-3 [data-handleid="outlet_node3"] {
+  right: 36px !important;
+  top: -59px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Little Chiller Condenser Inlet Node"] {
+  left: 42px !important;
+  top: 69.5px !important;
+  border-radius: 100% !important;
+  opacity: 0
+}
+
+.condenserDemand-splitter-3 [data-handleid="outlet_node2"] {
+  right: 146px !important;
+  top: -59px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserDemand-mixer-3 [data-handleid="outlet_node"] {
+  right: -23px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+}
+
+[data-handleid="Condenser Demand Exit Pipe Inlet Node"] {
+  left: 0 !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+  opacity: 0
+}
+
+[data-handleid="Condenser Supply Exit Pipe Inlet Node"] {
+  left: 70px !important;
+  top: 8px !important;
+  border-radius: 100% !important;
+  opacity: 0
+}
+
+.condenserDemand-isPipeInlet-3 [data-handleid="Condenser Demand Entrance Pipe Outlet Node"] {
+  right: 69px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+  opacity: 0
+}
+
+.condenserDemand-splitter-3 [data-handleid="inlet_node"] {
+  left: 169px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+}
+
+.condenserSupply-mixer-3 [data-handleid="outlet_node"] {
+  right: 46px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+}
+
+.condenserSupply-splitter-3 [data-handleid="inlet_node"] {
+  left: 168px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+}
+
+[data-handleid="Condenser Pump Outlet Node"] {
+  right: 65px !important;
+  top: 36px !important;
+  border-radius: 100% !important;
+  opacity: 0
+}
+
+.condenserSupply-mixer-3 [data-handleid="inlet_node2"] {
+  left: 37px !important;
+  top: 74.5px !important;
+  border-radius: 100% !important;
+}
+
+[data-handleid="Cond Supply Bypass Outlet Node"] {
+  right: 127px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+}
+
+[data-handleid="Cond Supply Bypass Inlet Node"] {
+  left: 127px !important;
+  top: 9px !important;
+  border-radius: 100% !important;
+}
+
+.condenserSupply-splitter-3 [data-handleid="outlet_node2"] {
+  right: 106px !important;
+  top: -58px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserSupply-splitter-3 [data-handleid="outlet_node1"] {
+  right: 146px !important;
+  top: -59px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Condenser Tower Inlet Node"] {
+  left: 20px !important;
+  top: -18px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+[data-handleid="Condenser Tower Outlet Node"] {
+  right: 36px !important;
+  top: 70px !important;
+  border-radius: 100% !important;
+  opacity: 0;
+}
+
+.condenserSupply-mixer-3 [data-handleid="inlet_node1"] {
+  left: -2px !important;
+  top: 75px !important;
   border-radius: 100% !important;
   opacity: 0;
 }

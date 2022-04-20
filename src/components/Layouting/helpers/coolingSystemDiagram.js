@@ -326,18 +326,19 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
 
     if(isConnectorMixer) {
       nodeX = 460;  
-      nodeY = 20;
+      nodeY = 260;
       classCss = `primarySupply-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
       nodeX = 460;  
-      nodeY = 260;
+      nodeY = 20;
       classCss = `primarySupply-splitter-${hashMapOrderLoop[item.key]}`
     }
  
     if(isByPassSupply) {
       nodeX = 345;
       nodeY = 140;
+      classCss = `primarySupply-isByPassSupply-${hashMapOrderLoop[item.key]}`
     }
     if(isPump) {
       nodeX = 300;
@@ -351,7 +352,7 @@ function renderNodePrimaryChilled(data, hashMapOrderLoop) {
     if(isPipeOutlet) {
       nodeX = 275;
       nodeY = 260;
-      classCss = `lineDarkBlue`
+      classCss = `lineDarkBlue primarySupply-isPipeOutlet-${hashMapOrderLoop[item.key]}`
     } 
   
     if(isLittleChiller) {
@@ -556,17 +557,17 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
     let classCss = '';
 
     if(isConnectorMixer) {
-      nodeX = 475;
-      nodeY = 0;
+      nodeX = 495;
+      nodeY = 280;
       classCss = `condenserSupply-mixer-${hashMapOrderLoop[item.key]}`
     }
     if(isConnectorSplitter) {
-      nodeX = 475;
-      nodeY = 280;
+      nodeX = 495;
+      nodeY = 0;
       classCss = `condenserSupply-splitter-${hashMapOrderLoop[item.key]}`
     }
     if(isByPassSupply) {
-      nodeX = 521;
+      nodeX = 541;
       nodeY = 130;
       classCss = `condenserSupply-bypass-${hashMapOrderLoop[item.key]}`
     }
@@ -575,7 +576,7 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
       nodeY = -28;
     }
     if(isTextSupply) {
-      nodeX = 490;
+      nodeX = 510;
       nodeY = 140;
       classCss = 'transparent nodeOnlyText';
     }
@@ -585,7 +586,7 @@ function renderNodeCondenser(data, hashMapOrderLoop) {
       classCss = `lineDarkBlue`
     } 
     if(isCoolingTower) {
-      nodeX = 600;
+      nodeX = 620;
       nodeY = 120;
       return {
         ...item,
