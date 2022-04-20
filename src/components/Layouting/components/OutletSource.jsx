@@ -3,7 +3,6 @@ import  {
   Position,
   Handle,
 } from 'react-flow-renderer';
-import clsx from 'clsx';
 
 const regexFrom = new RegExp(/(from_)\w+/);
 

@@ -1,17 +1,12 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import ReactFlow, {
-  ReactFlowProvider,
   Controls,
-  isNode,
-  Position,
   useNodesState,
   useEdgesState,
   addEdge,
   MiniMap,
   Background,
   getBezierPath, getMarkerEnd,
-  getEdgeCenter,
-  getSmoothStepPath, removeElements 
 } from 'react-flow-renderer';
 import dagre from 'dagre';
 import clsx from 'clsx';
@@ -24,7 +19,8 @@ import OutletSource from './components/OutletSource';
 import NodeItem from './components/NodeItem';
 
 // configs
-import { nodeWidth, nodeHeight } from 'configs';
+// import { nodeWidth, nodeHeight } from 'configs';
+
 // helpers
 import { regexOnlyPump, regexOnlyPipe } from './helpers/regexNodes'
 
@@ -221,91 +217,34 @@ const LayoutFlow = () => {
     sourcePosition,
     targetPosition,
     style = {},
-    data,
     arrowHeadType,
     markerEndId,
-    borderRadius = 5,
   }) => {
     const edgePath = getBezierPath({ sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition });
-
     const markerEnd = getMarkerEnd(arrowHeadType, markerEndId);
+    const [, setRatio] = useState(15);
 
-    const [Ratio, setRatio] = useState(15);
-
-    const [centerX, centerY] = getEdgeCenter({ sourceX, sourceY, targetX, targetY });
-
-return (
-    <>
-        <g>
-            <path id={id} style={{ ...style, stroke: "#BBC7D5" }} className="react-flow__edge-path" d={edgePath} markerEnd={markerEnd} />
-
-            <g onMouseEnter={
-                () => {
-                    setRatio(20)
-                }
-            } onMouseLeave={
-                () => {
-                    setRatio(15)
-                }
-            } width={20} style={{
-                width: 20
-            }}>
-                
-            </g>
-        </g>
-    </>
-);
+    return (
+      <>
+          <g>
+              <path id={id} style={{ ...style, stroke: "#BBC7D5" }} className="react-flow__edge-path" d={edgePath} markerEnd={markerEnd} />
+              <g onMouseEnter={
+                  () => {
+                      setRatio(20)
+                  }
+              } onMouseLeave={
+                  () => {
+                      setRatio(15)
+                  }
+              } width={20} style={{
+                  width: 20
+              }}>
+                  
+              </g>
+          </g>
+      </>
+    );
   }
-
-  // const CustomEdge = ({
-  //   id,
-  //   sourceX,
-  //   sourceY,
-  //   targetX,
-  //   targetY,
-  //   sourcePosition,
-  //   targetPosition,
-  //   style = {},
-  //   data,
-  //   markerEnd,
-  // }) => {
-  //   console.log('custom edge: ',  targetX);
-
-  //   const edgePath = getBezierPath({
-  //     sourceX,
-  //     sourceY,
-  //     targetX,
-  //     targetY,
-  //   });
-  
-  //   return (
-  //     <>
-  //       <path
-  //         id={id}
-  //         className={clsx(
-  //           "react-flow__edge-path line",
-  //           id            
-  //         )}
-  //         d={edgePath}
-  //         markerEnd={markerEnd}
-  //       />
-  //       <text>
-  //         <textPath
-  //           href={`#${id}`}
-  //           style={{ fontSize: '12px' }}
-  //           startOffset="50%"
-  //           textAnchor="middle"
-  //         >
-  //           {data.text}
-  //         </textPath>
-  //       </text>
-  //       {/* <div className="line">
-  //       {data.text}
-  //         </div> */}
-  //     </>
-  //   );
-  // }
-  
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const nodeTypes = useMemo(() => ({ special: CustomNodeComponent }), []);
