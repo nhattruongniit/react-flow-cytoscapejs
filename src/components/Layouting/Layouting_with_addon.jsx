@@ -12,7 +12,7 @@ import dagre from 'dagre';
 import ReactJson from 'react-json-view';
 
 // libs
-// import utils from "@usonia/usonia-addon-utils";
+import utils from "@usonia/usonia-addon-utils";
 
 // utils
 import { copyToClipboard } from 'helpers/copyToClipboard';

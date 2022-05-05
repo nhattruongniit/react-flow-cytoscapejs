@@ -1,17 +1,18 @@
-import React, { useState, Fragment, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import ReactFlow, {
-  ReactFlowProvider,
   Controls,
-  isNode,
-  Position,
   useNodesState,
-  // useEdgesState,
+  useEdgesState,
+  addEdge,
+  MiniMap,
+  Background,
+  getBezierPath, getMarkerEnd,
 } from 'react-flow-renderer';
 import dagre from 'dagre';
-import ReactJson from 'react-json-view';
 import clsx from 'clsx';
+import ReactJson from 'react-json-view';
 
-import { dataPlantLoop79 } from '../../mocks/dataPlantLoop-79';
+import { dataPlantLoop79 } from 'mocks/dataPlantLoop-79';
 
 // components
 import InletTarget from './components/InletTarget';
@@ -19,13 +20,15 @@ import OutletSource from './components/OutletSource';
 import NodeItem from './components/NodeItem';
 
 // configs
-import { nodeWidth, nodeHeight } from 'configs';
+// import { nodeWidth, nodeHeight } from 'configs';
+
 // helpers
 import { regexOnlyPump, regexOnlyPipe } from './helpers/regexNodes'
 
 // diagram 
 import { coolingSystemDiagram } from './helpers/coolingSystemDiagram';
 
+let isHorizontal = 'LR';
 const dagreGraph = new dagre.graphlib.Graph({ multigraph: true });
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
@@ -71,112 +74,54 @@ const hashMapOrderLoop = Object.keys(nodesLoop).reduce((acc, curr, index) => {
   return acc;
 }, {})
 
-// const initialData = dataPlantLoop79.reduce((loopMap, loopItem) => {
-//   if(loopItem.group === 'nodes') {
-//     const nodeItem = {
-//       ...loopItem.data,
-//       position,
-//       id: loopItem.data.id.toString(),
-//       // data: { label: loopItem.data.label },
-//       data: { text: loopItem.data.label },
-//       type: 'special',
-//     }
-//     loopMap.nodes += 1;
-//     loopMap.dataNode.push(nodeItem);
-//   } else if(loopItem.group === 'edges') {
-//     const edgeItem = {
-//       ...loopItem.data,
-//       id: loopItem.data.id.toString(), 
-//       source: loopItem.data.source.toString(), 
-//       target: loopItem.data.target.toString(), 
-//       animated: false, 
-//       group: 'edges',
-//       type: 'smoothstep', 
-//       targetHandle: loopItem.data.to_node.toString(),
-//       sourceHandle: loopItem.data.from_node.toString()
-//     }
-//     loopMap.edges += 1;
-//     loopMap.dataEdge.push(edgeItem);
-//   }
-//   return loopMap
-// }, {
-//   nodes: 0,
-//   edges: 0,
-//   dataNode: [],
-//   dataEdge: []
-// })
+const dataNodes = coolingSystemDiagram(dataPlantLoop79, nodesLoop, hashMapOrderLoop);
+const dataEdges = dataPlantLoop79.reduce((loopMap, loopItem) => {
+  if(loopItem.group === 'edges') {
+    const edgeItem = {
+      ...loopItem.data,
+      id: loopItem.data.id.toString(), 
+      source: loopItem.data.source.toString(), 
+      target: loopItem.data.target.toString(), 
+      animated: true, 
+      type: 'step', 
+      data: { text: loopItem.data.id.toString() },
+      targetHandle: loopItem.data.to_node.toString(),
+      sourceHandle: loopItem.data.from_node.toString()
+    }
+    loopMap.edges.push(edgeItem);
+  }
+  // if(loopItem.data.target === 4932) {
+  //     const edgeItem = {
+  //       ...loopItem.data,
+  //       id: loopItem.data.id.toString(), 
+  //       source: loopItem.data.source.toString(), 
+  //       target: loopItem.data.target.toString(), 
+  //       animated: true, 
+  //       type: 'custom', 
+  //       data: { text: loopItem.data.id.toString() },
+  //       targetHandle: loopItem.data.to_node.toString(),
+  //       sourceHandle: loopItem.data.from_node.toString()
+  //     }
+  //     loopMap.edges.push(edgeItem);
+  //   }
+  return loopMap
+}, {
+  edges: [],
+})
 
-
-const data = coolingSystemDiagram(dataPlantLoop79, nodesLoop, hashMapOrderLoop)
+console.log("layoutedEdges: ", dataEdges.edges)
 
 const LayoutFlow = () => {
+  const [edges, setEdges, onEdgesChange] = useEdgesState(dataEdges.edges);
+  const [nodes, , onNodesChange] = useNodesState(dataNodes);
   const [tab, setTab] = useState('json');
-  const [isHorizontal, setIsHorizontal] = useState('LR')
-  // const [edges, setEdges, onEdgesChange] = useEdgesState(initialData.dataEdge);
-  // const [nodes, setNodes, onNodesChange] = useNodesState(initialData.dataNode.concat(childNodeLoops));
-  // const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [nodes, setNodes, onNodesChange] = useNodesState(data);
 
-  function changeNormalEdge(event) {
-    const { checked } = event.target;
-    const cloneElements = JSON.parse(JSON.stringify(nodes));
-    if(checked) {
-      cloneElements.forEach(item => {
-        if(item.group === 'edges') {
-          item.animated = true
-        }
-      })
-    } else {
-      cloneElements.forEach(item => {
-        if(item.group === 'edges') {
-          item.animated = false
-        }
-      })
-    }
+  // const onConnect = useCallback(
+  //   (params) => setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
+  //   [setEdges]
+  // );
 
-    onLayout(cloneElements, 'LR');
-  }
-
-  const onLayout = async (layoutElements, direction = 'LR') => {
-    const isHorizontal = direction === 'LR';
-    // set direction layout
-    setIsHorizontal(direction);
-    dagreGraph.setGraph({ rankdir: direction });
-
-    layoutElements.forEach((el) => {
-      if (isNode(el)) {
-        dagreGraph.setNode(el.id, { width: nodeWidth, height: nodeHeight });
-      } else {
-        dagreGraph.setEdge(el.source, el.target);
-      }
-    });
-
-    dagre.layout(dagreGraph);
-
-    const layoutedElements = layoutElements.map((el) => {
-      if (isNode(el)) {
-        const nodeWithPosition = dagreGraph.node(el.id);
-        el.targetPosition = isHorizontal ? Position.Left : Position.Top;
-        el.sourcePosition = isHorizontal ? Position.Right : Position.Bottom;
-        // we need to pass a slightly different position in order to notify react flow about the change
-        // @TODO how can we change the position handling so that we dont need this hack?
-        // el.position = {
-        //   // The position from dagre layout is the center of the node.
-        //   // Calculating the position of the top left corner for rendering.
-        //   x: nodeWithPosition.x - nodeWithPosition.width / 2,
-        //   y: nodeWithPosition.y - nodeWithPosition.height / 2,
-        // };
-        if(!el.isNotDynamicNode) {
-          el.position = { x: nodeWithPosition.x + Math.random() / 1000, y: nodeWithPosition.y };
-        }
-      }
-
-      return el;
-    });
-
-    setNodes(layoutedElements);
-  };
-
+  const onConnect = (params) => setEdges((eds) => addEdge(params, eds));
 
   const CustomNodeComponent = ({ id, data, ...props}) => {
     const nodeItem = nodes.find(element => element.id === id) 
@@ -234,7 +179,8 @@ const LayoutFlow = () => {
             className={clsx(
               "layouting_label",
               isSplitter && 'splitter',
-              isMixerNode && 'mixer'
+              isMixerNode && 'mixer',
+              nodeItem.lineCss
               // nodeItem.classCss
             )}
           >
@@ -264,53 +210,70 @@ const LayoutFlow = () => {
     );
   };
 
-  // const nodeTypes = {
-  //   special: CustomNodeComponent,
-  // };
+  const CustomEdge = ({
+    id,
+    sourceX,
+    sourceY,
+    targetX,
+    targetY,
+    sourcePosition,
+    targetPosition,
+    style = {},
+    arrowHeadType,
+    markerEndId,
+  }) => {
+    const edgePath = getBezierPath({ sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition });
+    const markerEnd = getMarkerEnd(arrowHeadType, markerEndId);
+    const [, setRatio] = useState(15);
+
+    return (
+      <>
+          <g>
+              <path id={id} style={{ ...style, stroke: "#BBC7D5" }} className="react-flow__edge-path" d={edgePath} markerEnd={markerEnd} />
+              <g onMouseEnter={
+                  () => {
+                      setRatio(20)
+                  }
+              } onMouseLeave={
+                  () => {
+                      setRatio(15)
+                  }
+              } width={20} style={{
+                  width: 20
+              }}>
+                  
+              </g>
+          </g>
+      </>
+    );
+  }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const nodeTypes = useMemo(() => ({ special: CustomNodeComponent }), []);
+  const edgeTypes = useMemo(() => ({ custom: CustomEdge }), []);
 
   return (
     <div className='layouting_wrapper'>
       <div className="layoutflow coolingCoil">
-        <ReactFlowProvider>
-          <ReactFlow
-            // elements={elements}
-            // onConnect={onConnect}
-            // onElementsRemove={onElementsRemove}
-            // onLoad={() => onLayout(nodes, 'LR')}
-            // edges={edges}
-            nodeTypes={nodeTypes}
-            onInit={() => onLayout(nodes, 'LR')}
-            nodes={nodes} 
-            onNodesChange={onNodesChange}
-            // onEdgesChange={onEdgesChange}
-          >
-            <Controls />
-          </ReactFlow>
-          <div className="controls">
-           
-            {/* <button 
-              type="button" 
-              className={isHorizontal === 'TB' ? 'btn btn-info' : 'btn btn-secondary' }
-              onClick={() => onLayout(elements, 'TB')} 
-              style={{ marginRight: 10 }}
-            >
-              vertical layout
-            </button> */}
-            <button 
-              type="button" 
-              className={isHorizontal === 'LR' ? 'btn btn-info' : 'btn btn-secondary' }
-              onClick={() => onLayout(nodes, 'LR')}
-            >
-              horizontal layout
-            </button>
-          </div>
-        </ReactFlowProvider>
+        <ReactFlow
+          nodes={nodes} 
+          edges={edges}
+          nodeTypes={nodeTypes}
+          edgeTypes={edgeTypes}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          snapToGrid
+          // fitView
+          attributionPosition="top-right"
+        >
+          <MiniMap />
+          <Controls />
+          <Background />
+        </ReactFlow>
       </div>
-      <div className='layouting_drawer' style={{ display: 'none' }}>
-        <div className='layouting_button'> 
+      <div className='layouting_drawer'>
+        <div className='layouting_button'>
           <button 
             type="button" 
             className={`btn btn-sm ${tab === 'nodes' ? 'btn-primary': 'btn-secondary' }`}
@@ -325,20 +288,15 @@ const LayoutFlow = () => {
           >
             Show Json
           </button>
-
-          <button 
-            type="button" 
-            className={`btn btn-sm ${tab === 'loop' ? 'btn-primary': 'btn-secondary' }`}
-            onClick={() => setTab('loop')}
-          >
-            Loop
-          </button>
+          <br />
+          <br />
+          
         </div>
 
-        <div className="layouting_checkbox">
+        {/* <div className="layouting_checkbox">
           <input type="checkbox" className="form-check-input" id="normalEdge" onChange={changeNormalEdge} />
           <label className="form-check-label" htmlFor="normalEdge">Animated Edge</label>
-        </div>
+        </div> */}
 
         <div className="layouting_content">
           {tab === 'json' && (
@@ -352,41 +310,8 @@ const LayoutFlow = () => {
               nodes
             </div>
           )}
-
-          {tab === 'loop' && (
-            <div className="nodesLoopItem_container">
-              {Object.keys(nodesLoop).map((loop, indexLoop) => {
-                const order = indexLoop + 1;
-                return (
-                  <div key={indexLoop} className="nodesLoopItem">
-                    <div>
-                      Loop{order}:
-                    </div>
-                    <div className="nodesLoopItem_content">
-                      <span>(Group node - {order})</span>
-                      {Object.keys(nodesLoop[loop]).map((child, indexChild) => {
-                        const childNode = nodesLoop[loop][child];
-                        return (
-                          <span key={indexChild} className="text-transform-capitalize">
-                            {child}: {' '}
-                            {childNode.map((sub, indexSub) => (
-                              <Fragment key={indexSub}>
-                                {sub}{childNode.length > 1 && `,`}
-                              </Fragment>
-                            ))}
-                          </span>
-                        )
-                      })}
-                    
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          )}
         </div>
       </div>
-      
     </div>
   );
 };

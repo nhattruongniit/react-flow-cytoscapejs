@@ -10,8 +10,9 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 import dagre from 'dagre';
 import clsx from 'clsx';
+import ReactJson from 'react-json-view';
 
-import { dataPlantLoop79 } from '../../mocks/dataPlantLoop-79';
+import { dataPlantLoop79 } from 'mocks/dataPlantLoop-79';
 
 // components
 import InletTarget from './components/InletTarget';
@@ -113,6 +114,7 @@ console.log("layoutedEdges: ", dataEdges.edges)
 const LayoutFlow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(dataEdges.edges);
   const [nodes, , onNodesChange] = useNodesState(dataNodes);
+  const [tab, setTab] = useState('json');
 
   // const onConnect = useCallback(
   //   (params) => setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
@@ -269,6 +271,46 @@ const LayoutFlow = () => {
           <Controls />
           <Background />
         </ReactFlow>
+      </div>
+      <div className='layouting_drawer'>
+        <div className='layouting_button'>
+          <button 
+            type="button" 
+            className={`btn btn-sm ${tab === 'nodes' ? 'btn-primary': 'btn-secondary' }`}
+            onClick={() => setTab('nodes')}
+          >
+            Nodes
+          </button>
+          <button 
+            type="button" 
+            className={`btn btn-sm ${tab === 'json' ? 'btn-primary': 'btn-secondary' }`}
+            onClick={() => setTab('json')}
+          >
+            Show Json
+          </button>
+          <br />
+          <br />
+          
+        </div>
+
+        {/* <div className="layouting_checkbox">
+          <input type="checkbox" className="form-check-input" id="normalEdge" onChange={changeNormalEdge} />
+          <label className="form-check-label" htmlFor="normalEdge">Animated Edge</label>
+        </div> */}
+
+        <div className="layouting_content">
+          {tab === 'json' && (
+            <div>
+              <ReactJson enableClipboard={false} src={dataPlantLoop79} />
+            </div>
+          )}
+
+          {tab === 'nodes' && (
+            <div>
+              nodes
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
