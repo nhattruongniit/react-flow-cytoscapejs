@@ -110,6 +110,7 @@ const dataEdges = dataPlantLoop79.reduce((loopMap, loopItem) => {
 })
 
 console.log("layoutedEdges: ", dataEdges.edges)
+console.log("dataNodes: ", dataNodes)
 
 const LayoutFlow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(dataEdges.edges);
