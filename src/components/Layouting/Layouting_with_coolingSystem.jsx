@@ -68,6 +68,8 @@ const nodesLoop = [...new Set(loops.map(ele => ele.label))].reduce((acc, curr) =
   return acc;
 }, {})
 
+console.log('nodesLoop: ', nodesLoop)
+
 // hashMap parent loop
 const hashMapOrderLoop = Object.keys(nodesLoop).reduce((acc, curr, index) => {
   acc[curr] = `${index + 1}`.toString();
@@ -109,8 +111,6 @@ const dataEdges = dataPlantLoop79.reduce((loopMap, loopItem) => {
   edges: [],
 })
 
-console.log("layoutedEdges: ", dataEdges.edges)
-console.log("dataNodes: ", dataNodes)
 
 const LayoutFlow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(dataEdges.edges);
@@ -273,7 +273,7 @@ const LayoutFlow = () => {
           <Background />
         </ReactFlow>
       </div>
-      <div className='layouting_drawer'>
+      <div className='layouting_drawer' style={{ display: 'none' }}>
         <div className='layouting_button'>
           <button 
             type="button" 

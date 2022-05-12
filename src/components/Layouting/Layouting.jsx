@@ -18,12 +18,10 @@ const dagreGraph = new dagre.graphlib.Graph({ multigraph: true });
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
 const LayoutFlow = () => {
-  const { dataNodes, groupNodes, hashMapOrderLoop } = initialState(dataPlantLoop79);
-  const layoutedNodes = clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop);
+  const { dataNodes, dataEdges, groupNodes, hashMapOrderLoop } = initialState(dataPlantLoop79);
+  const layoutedNodes = clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop, dataEdges);
   const [nodes, , onNodesChange] = useNodesState(layoutedNodes);
 
-  console.log('nodes: ', nodes)
- 
   return (
     <div className='layouting_wrapper'>
       <div className="layoutflow coolingCoil">

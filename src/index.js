@@ -27,8 +27,9 @@ import LayoutingCoolingSystem from './components/Layouting/Layouting_with_coolin
 function App() {
   return (
     <>
-       <Layouting /> 
-       {/* <LayoutingCoolingSystem /> */}
+       {/* <Layouting />  */}
+       <br /><br /><br /><br />
+       <LayoutingCoolingSystem />
     </>
   )
   // return (

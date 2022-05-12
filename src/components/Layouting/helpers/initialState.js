@@ -1,6 +1,27 @@
-import { POSITION } from './constant';
+import { POSITION_NODE } from './constant';
 
 export default function initialState(data) {
+  // initial edges
+
+  const dataEdges = data.reduce((acc, curr) => {
+    if(curr.group === 'edges') {
+      const edgeItem = {
+        ...curr.data,
+        id: curr.data.id.toString(), 
+        source: curr.data.source.toString(), 
+        target: curr.data.target.toString(), 
+        animated: true, 
+        type: 'step', 
+        data: { text: curr.data.id.toString() },
+        targetHandle: curr.data.to_node.toString(),
+        sourceHandle: curr.data.from_node.toString()
+      }
+      acc.edges.push(edgeItem);
+    }
+    return acc
+  }, {
+    edges: [],
+  })
   // initial nodes
   const nodes = [];
   data.filter(item => Object.keys(item.data).find(key => key.includes('loop')))
@@ -10,8 +31,9 @@ export default function initialState(data) {
           ...nodeItem.data,
           id: nodeItem.data.id.toString(),
           group: item.split(':')[0],
-          position: { ...POSITION.defaultNode},
+          position: { ...POSITION_NODE.defaultNode},
           type: 'input',
+          label:item,
           data: {
             label: nodeItem.data.label
           }
@@ -20,7 +42,7 @@ export default function initialState(data) {
     });
 
   // find group nodes
-  const groupNodes = [...new Set(nodes.map(ele => ele.group))].reduce((acc, curr) => {
+  const groupNodes = [...new Set(nodes.map(ele => ele.label))].reduce((acc, curr) => {
     const currSplit = curr.split(':');
     const textFirst = currSplit[0];
     const textLast = currSplit[currSplit.length - 1];
@@ -42,14 +64,23 @@ export default function initialState(data) {
     return acc;
   }, {});
 
+  console.log('groupNodes: ', groupNodes)
+
   // order parent loop
   const hashMapOrderLoop = Object.keys(groupNodes).reduce((acc, curr, index) => {
     acc[curr] = `${index + 1}`.toString();
     return acc;
   }, {});
 
+  // add parent node into each nodes
+  const newNodes = nodes.map(nodeItem => {
+    nodeItem.parentNode = hashMapOrderLoop[nodeItem.group];
+    return nodeItem;
+  })
+
   return {
-    dataNodes: nodes,
+    dataNodes: newNodes,
+    dataEdges: dataEdges.edges,
     groupNodes,
     hashMapOrderLoop
   }
