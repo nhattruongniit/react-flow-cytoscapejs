@@ -1,21 +1,59 @@
 import { POSITION_NODE, SIZE_NODE } from './constant';
 
+const regexInlet = new RegExp(/(to_)\w+/);
+const regexOutlet = new RegExp(/(from_)\w+/);
+
 export default function clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop, dataEdges) {
 
-  console.log('dataNodes: ', dataNodes)
-  console.log('dataEdges: ', dataEdges)
-  console.log('groupNodes: ', groupNodes)
-  console.log('hashMapOrderLoop: ', hashMapOrderLoop)
+  // console.log('dataNodes: ', dataNodes);
+  // console.log('dataEdges: ', dataEdges);
+  // console.log('groupNodes: ', groupNodes);
+  // console.log('hashMapOrderLoop: ', hashMapOrderLoop);
+  const fullData = [].concat(dataNodes, dataEdges);
   
-  const specifiyNodes = dataNodes.reduce((nodeMap, nodeItem) => {
-    // start node
-    return nodeMap;
-  }, {
-    nodes: []
+  // find startNode
+  const startNode = fullData.filter(item => {
+    const inlet = item?.nodes?.inlet.filter(item => !regexInlet.test(item));
+    const outlet = item?.nodes?.outlet.filter(item => !regexOutlet.test(item));
+    const isSource = dataEdges.map(edge => edge.source).indexOf(item.id);
+    const isTarget = dataEdges.map(edge => edge.target).indexOf(item.id);
+
+    const isStartNode = inlet?.length === 1 && outlet?.length === 1 && isSource > -1 && isTarget <= -1
+
+    if(isStartNode && item.isNode) {
+      if(item.halfLoop === 'demand') {
+        item.position = {
+          x: POSITION_NODE.startNode.x,
+          y: POSITION_NODE.startNode.y
+        }
+      }
+     
+    }
+    
+
+
+    return isStartNode
   })
 
 
-  console.log('specifiyNodes: ', specifiyNodes)
+  // dataEdges.forEach(edge => {
+  //   dataNodes.forEach(node => {
+  //     const inlet = node?.nodes?.inlet.filter(item => !regexInlet.test(item));
+  //     const outlet = node?.nodes?.outlet.filter(item => !regexOutlet.test(item));
+  //     const isTarget = node.id === edge.target;
+  //     const isSource = node.id === edge.source;
+  //     if(inlet?.length === 1 && outlet?.length === 1) {
+  //       console.log('node: ', node)
+  //       nodeOneInletOneOutlet.push(node)
+  //     }
+  //   })
+  // })
+
+
+
+  console.log('dataNodes: ', dataNodes);
+ console.log('dataEdges: ', dataEdges)
+ console.log('startNode: ', startNode)
 
   const nodeGroup = Object.keys(groupNodes).reduce((nodeMap, nodeItem, index) => {
     // push parent node item

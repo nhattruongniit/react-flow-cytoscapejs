@@ -4,8 +4,8 @@ export const POSITION_NODE = {
     y: -100
   },
   startNode: {
-    x: 0,
-    y: 0
+    x: 170,
+    y: 261.5
   },
   endNode: {
     x: 0,

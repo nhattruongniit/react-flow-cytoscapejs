@@ -18,8 +18,8 @@ const dagreGraph = new dagre.graphlib.Graph({ multigraph: true });
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
 const LayoutFlow = () => {
-  const { dataNodes, dataEdges, groupNodes, hashMapOrderLoop } = initialState(dataPlantLoop79);
-  const layoutedNodes = clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop, dataEdges);
+  const { dataNodes, dataEdges, groupNodes, hashMapOrderLoop, defaultData } = initialState(dataPlantLoop79);
+  const layoutedNodes = clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop, dataEdges, defaultData);
   const [nodes, , onNodesChange] = useNodesState(layoutedNodes);
 
   return (

@@ -2,7 +2,6 @@ import { POSITION_NODE } from './constant';
 
 export default function initialState(data) {
   // initial edges
-
   const dataEdges = data.reduce((acc, curr) => {
     if(curr.group === 'edges') {
       const edgeItem = {
@@ -12,6 +11,7 @@ export default function initialState(data) {
         target: curr.data.target.toString(), 
         animated: true, 
         type: 'step', 
+        isNode: false,
         data: { text: curr.data.id.toString() },
         targetHandle: curr.data.to_node.toString(),
         sourceHandle: curr.data.from_node.toString()
@@ -22,6 +22,7 @@ export default function initialState(data) {
   }, {
     edges: [],
   })
+
   // initial nodes
   const nodes = [];
   data.filter(item => Object.keys(item.data).find(key => key.includes('loop')))
@@ -33,6 +34,8 @@ export default function initialState(data) {
           group: item.split(':')[0],
           position: { ...POSITION_NODE.defaultNode},
           type: 'input',
+          isNode: true,
+          halfLoop: item.split(':')[item.split(':').length - 1],
           label:item,
           data: {
             label: nodeItem.data.label
@@ -82,6 +85,7 @@ export default function initialState(data) {
     dataNodes: newNodes,
     dataEdges: dataEdges.edges,
     groupNodes,
-    hashMapOrderLoop
+    hashMapOrderLoop,
+    defaultData: data
   }
 }
