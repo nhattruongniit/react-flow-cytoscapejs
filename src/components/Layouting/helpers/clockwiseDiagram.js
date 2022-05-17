@@ -12,14 +12,14 @@ export default function clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop
   const fullData = [].concat(dataNodes, dataEdges);
   
   // find startNode
-  const startNode = fullData.filter(item => {
+  fullData.forEach(item => {
     const inlet = item?.nodes?.inlet.filter(item => !regexInlet.test(item));
     const outlet = item?.nodes?.outlet.filter(item => !regexOutlet.test(item));
     const isSource = dataEdges.map(edge => edge.source).indexOf(item.id);
     const isTarget = dataEdges.map(edge => edge.target).indexOf(item.id);
 
+    // start node
     const isStartNode = inlet?.length === 1 && outlet?.length === 1 && isSource > -1 && isTarget <= -1
-
     if(isStartNode && item.isNode) {
       if(item.halfLoop === 'demand') {
         item.position = {
@@ -27,12 +27,19 @@ export default function clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop
           y: POSITION_NODE.startNode.y
         }
       }
-     
     }
-    
 
+    // end node
+    const isEndNode = inlet?.length === 1 && outlet?.length === 1 && isSource <= -1 && isTarget > -1
+    if(isEndNode && item.isNode) {
+      if(item.halfLoop === 'demand') {
+        item.position = {
+          x: 170,
+          y: 20
+        }
+      }
+    }
 
-    return isStartNode
   })
 
 
@@ -53,7 +60,7 @@ export default function clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop
 
   console.log('dataNodes: ', dataNodes);
  console.log('dataEdges: ', dataEdges)
- console.log('startNode: ', startNode)
+//  console.log('startNode: ', startNode)
 
   const nodeGroup = Object.keys(groupNodes).reduce((nodeMap, nodeItem, index) => {
     // push parent node item
