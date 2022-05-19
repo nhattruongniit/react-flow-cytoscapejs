@@ -33,6 +33,10 @@ export default function initialState(data) {
           id: nodeItem.data.id.toString(),
           group: item.split(':')[0],
           position: { ...POSITION_NODE.defaultNode},
+          style: {
+            width: 190,
+            height: 22
+          },
           type: 'input',
           isNode: true,
           halfLoop: item.split(':')[item.split(':').length - 1],
