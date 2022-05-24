@@ -79,10 +79,18 @@ export default function initialState(data) {
     return acc;
   }, {});
 
-  // add parent node into each nodes
-  const newNodes = nodes.map(nodeItem => {
-    nodeItem.parentNode = hashMapOrderLoop[nodeItem.group];
-    return nodeItem;
+  // add source, target fields into each nodes
+  const newNodes = [];
+  const fullData = [].concat(nodes, dataEdges.edges);
+  fullData.forEach(node => {
+    if(node.isNode) {
+      node.parentNode = hashMapOrderLoop[node.group];
+      const target = dataEdges.edges.filter(edge => (edge.target !== node.id) && (edge.source === node.id)).map(item => item.target) || [];
+      const source = dataEdges.edges.filter(edge => (edge.target === node.id) && (edge.source !== node.id)).map(item => item.source) || [];
+      node.target = target;
+      node.source = source
+      newNodes.push(node)
+    }
   })
 
   return {

@@ -11,7 +11,7 @@ export default function clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop
   // console.log('hashMapOrderLoop: ', hashMapOrderLoop);
   const fullData = [].concat(dataNodes, dataEdges);
   const startNode = [];
-  const nextNode01 = [];
+  const endNode = [];
   fullData.forEach(node => {
     const inlet = node?.nodes?.inlet.filter(item => !regexInlet.test(item));
     const outlet = node?.nodes?.outlet.filter(item => !regexOutlet.test(item));
@@ -28,27 +28,9 @@ export default function clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop
           y: POSITION_NODE.startNode.y
         }
       }
-      const itemObj = {
-        ...node,
-        source: dataEdges.find(edge => edge.source === node.id)?.source || ''
-      }
-      startNode.push(itemObj)
+      startNode.push(node)
     }
-
-    // find next node 1 of start node
-    const isNextNode01 = dataEdges.some(edge => edge.target === node.id && startNode.some(ele => ele.source === edge.source));
-
-    if(isNextNode01) {
-      nextNode01.push(node);
-      if(node.halfLoop === 'demand') {
-        node.position = {
-          x: POSITION_NODE.startNode.x + 200,
-          y: POSITION_NODE.startNode.y
-        }
-      }
-    }
-    // const isSourceStartNode = startNode.map(node => dataEdges.)
-
+    
     // end node
     const isEndNode = inlet?.length === 1 && outlet?.length === 1 && isSource <= -1 && isTarget > -1
     if(isEndNode && node.isNode) {
@@ -58,14 +40,62 @@ export default function clockwiseDiagram(dataNodes, groupNodes, hashMapOrderLoop
           y: 20
         }
       }
+      endNode.push(node)
+    }
+    // find next node 1 of start node
+    // next node này có node id la tagert, start node la source trong edge
+    // const isNextNode01 = dataEdges.some(edge => edge.target === node.id && startNode.some(ele => ele.source === edge.source));
+    // if(isNextNode01) {
+    //   if(node.halfLoop === 'demand') {
+    //     node.position = {
+    //       x: POSITION_NODE.startNode.x - 200,
+    //       y: POSITION_NODE.startNode.y
+    //     }
+      
+    //   }
+    //   const itemObj = {
+    //     ...node,
+    //     target: dataEdges.filter(edge => (edge.target !== node.id) && (edge.source === node.id)).map(item => item.target) || [],
+    //     source: dataEdges.filter(edge => (edge.target === node.id) && (edge.source !== node.id)).map(item => item.source) || [],
+    //   }
+    //   nextNode01.push(itemObj);
+    // }
+    // const isNextNode01 = dataEdges.some(edge => startNode.some(ele => ele.target.includes(edge.target)))
+  
+
+    // find next nodes of next node 1
+    // next node này có node id la tagert, start node la source trong edge
+  })
+
+  dataNodes.forEach(node => {
+
+    // find next node 1 of start node
+    const isNextNode01 = startNode.some(ele => ele.target.includes(node.id))
+    if(isNextNode01 && node.isNode) {
+      if(node.halfLoop === 'demand') {
+        node.position = {
+          x: POSITION_NODE.startNode.x - 200,
+          y: POSITION_NODE.startNode.y
+        }
+      }
     }
 
+    // find next node 1 of end node
+    const isNextOfNextNode1 = endNode.some(ele => ele.source.includes(node.id))
+    if(isNextOfNextNode1 && node.isNode) {
+      if(node.halfLoop === 'demand') {
+        node.position = {
+          x: POSITION_NODE.startNode.x - 200,
+          y: 20
+        }
+      }
+    }
   })
   
   console.log('dataNodes: ', dataNodes);
   console.log('dataEdges: ', dataEdges)
- console.log('startNode: ', startNode)
- console.log('nextNode01: ', nextNode01)
+  console.log('startNode: ', startNode)
+  console.log('endNode: ', endNode)
 
   const nodeGroup = Object.keys(groupNodes).reduce((nodeMap, nodeItem, index) => {
     // push parent node item
